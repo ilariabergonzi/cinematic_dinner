@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Collabora con noi | Cinematic Dinner</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* MENU */
+
+    .menu {
+      width: 100%;
+      padding: 28px 5%;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .menu ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 42px;
+      list-style: none;
+    }
+
+    .menu a {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    .menu a:hover {
+      opacity: 0.6;
+    }
+
+    /* CONTENUTO */
+
+    .collabora {
+      min-height: calc(100vh - 75px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 5%;
+      text-align: center;
+    }
+
+    .collabora p {
+      max-width: 900px;
+      color: #d0d0d0;
+      font-size: clamp(22px, 3vw, 38px);
+      line-height: 1.4;
+    }
+
+    /* VERSIONE TELEFONO */
+
+    @media (max-width: 750px) {
+      .menu {
+        padding: 22px 20px;
+        overflow-x: auto;
+      }
+
+      .menu ul {
+        width: max-content;
+        justify-content: flex-start;
+        gap: 25px;
+      }
+
+      .menu a {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="progetto.html">Il progetto</a></li>
+      <li><a href="collabora.html">Collabora con noi</a></li>
+      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <main class="collabora">
+    <p>
+      In questa pagina ci rivolgiamo ai partner: ci saranno due sezioni,
+      ristoranti ed eventi privati, con all’interno la spiegazione su come
+      candidarsi, le verifiche necessarie e ciò che proponiamo.
+    </p>
+  </main>
+
+</body>
+</html>
