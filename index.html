@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cinematic Dinner</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* MENU */
+
+    .menu {
+      width: 100%;
+      padding: 28px 5%;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .menu ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 42px;
+      list-style: none;
+    }
+
+    .menu a {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    .menu a:hover {
+      opacity: 0.6;
+    }
+
+    /* CONTENUTO HOME */
+
+    .home {
+      min-height: calc(100vh - 75px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 5%;
+      text-align: center;
+    }
+
+    .home-content {
+      max-width: 1000px;
+    }
+
+    .home h1 {
+      font-size: clamp(55px, 10vw, 130px);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -5px;
+      text-transform: uppercase;
+    }
+
+    .home-frase {
+      max-width: 750px;
+      margin: 35px auto 45px;
+      color: #d0d0d0;
+      font-size: clamp(20px, 3vw, 32px);
+      line-height: 1.35;
+    }
+
+    .home-bottone {
+      display: inline-block;
+      padding: 18px 30px;
+      border: 1px solid #ffffff;
+      background-color: #ffffff;
+      color: #0d0d0d;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .home-bottone:hover {
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    /* VERSIONE TELEFONO */
+
+    @media (max-width: 750px) {
+      .menu {
+        padding: 22px 20px;
+        overflow-x: auto;
+      }
+
+      .menu ul {
+        width: max-content;
+        justify-content: flex-start;
+        gap: 25px;
+      }
+
+      .menu a {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .home h1 {
+        letter-spacing: -3px;
+      }
+
+      .home-frase {
+        margin-top: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="progetto.html">Il progetto</a></li>
+      <li><a href="collabora.html">Collabora con noi</a></li>
+      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <main class="home">
+    <div class="home-content">
+
+      <h1>Cinematic Dinner</h1>
+
+      <p class="home-frase">
+        Rivivi le storie che ami.<br>
+        Questa volta, a tavola.
+      </p>
+
+      <a class="home-bottone" href="eventi.html">
+        Scopri tutti i nostri eventi
+      </a>
+
+    </div>
+  </main>
+
+</body>
+</html>
