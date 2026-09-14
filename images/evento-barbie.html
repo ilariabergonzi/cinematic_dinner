@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Barbie | Cinematic Dinner</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* MENU */
+
+    .menu {
+      width: 100%;
+      padding: 28px 5%;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .menu ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 42px;
+      list-style: none;
+    }
+
+    .menu a {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    .menu a:hover {
+      opacity: 0.6;
+    }
+
+    /* STRUTTURA GENERALE */
+
+    .contenitore {
+      width: min(1200px, 90%);
+      margin: 0 auto;
+    }
+
+    .sezione {
+      padding: 100px 0;
+      border-bottom: 1px solid #2c2c2c;
+    }
+
+    .titolo-sezione {
+      margin-bottom: 45px;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -3px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* INTESTAZIONE EVENTO */
+
+    .evento-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 720px;
+      margin-top: 70px;
+      border: 1px solid #333333;
+    }
+
+    .evento-locandina {
+      width: 100%;
+      height: 100%;
+      min-height: 720px;
+      object-fit: cover;
+    }
+
+    .evento-dettagli {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(45px, 7vw, 90px);
+      background-color: #171717;
+    }
+
+    .evento-dettagli h1 {
+      margin-bottom: 70px;
+      font-size: clamp(65px, 9vw, 125px);
+      line-height: 0.85;
+      letter-spacing: -6px;
+      text-transform: uppercase;
+    }
+
+    .informazione + .informazione {
+      margin-top: 45px;
+    }
+
+    .informazione h2 {
+      margin-bottom: 10px;
+      color: #ff62b1;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .informazione p {
+      font-size: clamp(22px, 2.5vw, 34px);
+      line-height: 1.25;
+    }
+
+    /* ESPERIENZA */
+
+    .esperienza {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .esperienza p {
+      color: #d0d0d0;
+      font-size: clamp(19px, 2.2vw, 26px);
+      line-height: 1.7;
+    }
+
+    .esperienza p + p {
+      margin-top: 25px;
+    }
+
+    /* MENU DELLA SERATA */
+
+    .menu-serata {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .portata {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      align-items: baseline;
+      gap: 25px;
+      padding: 25px 0;
+      border-bottom: 1px solid #333333;
+    }
+
+    .tipo-portata {
+      color: #ff62b1;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nome-portata {
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1.3;
+    }
+
+    .allergeni-numeri {
+      margin-left: 8px;
+      color: #bdbdbd;
+      font-size: 14px;
+      font-weight: 400;
+      vertical-align: super;
+    }
+
+    .legenda {
+      margin-top: 55px;
+      padding: 35px;
+      background-color: #171717;
+      border: 1px solid #333333;
+    }
+
+    .legenda h3 {
+      margin-bottom: 25px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .legenda-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px 35px;
+      color: #c8c8c8;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    /* ESIGENZE ALIMENTARI */
+
+    .esigenze-intro {
+      margin: -20px 0 45px;
+      color: #d0d0d0;
+      font-size: clamp(19px, 2vw, 25px);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .menu-speciali {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .menu-speciale {
+      margin-bottom: 18px;
+      border: 1px solid #444444;
+      background-color: #171717;
+    }
+
+    .menu-speciale summary {
+      position: relative;
+      padding: 25px 65px 25px 25px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      text-transform: uppercase;
+    }
+
+    .menu-speciale summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .menu-speciale summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      color: #ff62b1;
+      font-size: 30px;
+      transform: translateY(-50%);
+    }
+
+    .menu-speciale[open] summary::after {
+      content: "−";
+    }
+
+    .menu-speciale p {
+      padding: 0 25px 25px;
+      color: #c8c8c8;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .menu-speciale strong {
+      color: #ffffff;
+    }
+
+    /* CONTATTI */
+
+    .contatti-evento {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contatti-testo {
+      margin: -20px 0 45px;
+      color: #d0d0d0;
+      font-size: 20px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .contatti-form {
+      display: grid;
+      gap: 24px;
+    }
+
+    .campo {
+      display: grid;
+      gap: 9px;
+    }
+
+    .campo label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .campo input,
+    .campo textarea {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #555555;
+      border-radius: 0;
+      outline: none;
+      background-color: #181818;
+      color: #ffffff;
+      font: inherit;
+    }
+
+    .campo input:focus,
+    .campo textarea:focus {
+      border-color: #ffffff;
+    }
+
+    .campo textarea {
+      min-height: 190px;
+      resize: vertical;
+    }
+
+    .invia {
+      margin-top: 10px;
+      padding: 17px 28px;
+      border: 1px solid #ffffff;
+      background-color: #ffffff;
+      color: #0d0d0d;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .invia:hover {
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .campo-esca {
+      display: none;
+    }
+
+    /* VERSIONE TELEFONO */
+
+    @media (max-width: 800px) {
+      .menu {
+        padding: 22px 20px;
+        overflow-x: auto;
+      }
+
+      .menu ul {
+        width: max-content;
+        justify-content: flex-start;
+        gap: 25px;
+      }
+
+      .menu a {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .sezione {
+        padding: 75px 0;
+      }
+
+      .evento-intro {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        margin-top: 35px;
+      }
+
+      .evento-locandina {
+        min-height: auto;
+        aspect-ratio: 3 / 4;
+      }
+
+      .evento-dettagli {
+        padding: 45px 28px;
+      }
+
+      .evento-dettagli h1 {
+        margin-bottom: 45px;
+        letter-spacing: -4px;
+      }
+
+      .portata {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .legenda {
+        padding: 25px;
+      }
+
+      .legenda-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="progetto.html">Il progetto</a></li>
+      <li><a href="collabora.html">Collabora con noi</a></li>
+      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- LOCANDINA E INFORMAZIONI -->
+
+    <section class="contenitore">
+      <div class="evento-intro">
+
+        <img
+          class="evento-locandina"
+          src="images/barbie.jpeg"
+          alt="Locandina dell’evento Barbie"
+        >
+
+        <div class="evento-dettagli">
+          <h1>Barbie</h1>
+
+          <div class="informazione">
+            <h2>Dove</h2>
+            <p>Ristorante Blabla<br>Soncino</p>
+          </div>
+
+          <div class="informazione">
+            <h2>Quando</h2>
+            <p>14 settembre 2026</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ESPERIENZA -->
+
+    <section class="sezione">
+      <div class="contenitore esperienza">
+
+        <h2 class="titolo-sezione">L’esperienza</h2>
+
+        <p>
+          Per una sera il mondo reale si tingerà di rosa e il cinema
+          uscirà dallo schermo per arrivare direttamente a tavola.
+        </p>
+
+        <p>
+          Rivivremo insieme l’ironia, la nostalgia e l’energia di
+          <strong>Barbie</strong> attraverso una proiezione speciale e
+          un menu di quattro portate ispirato ai suoi momenti più iconici.
+        </p>
+
+        <p>
+          Ogni piatto accompagnerà una tappa diversa del viaggio:
+          dall’entusiasmo scintillante di una giornata perfetta fino alle
+          domande meno perfette — e decisamente più umane — nascoste dietro
+          tutto quel rosa. Non ti sveliamo cosa arriverà nel piatto:
+          possiamo solo dirti che, per qualche ora, non sarai più
+          semplicemente davanti al film. Sarai dentro il suo mondo.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- MENU DELLA SERATA -->
+
+    <section class="sezione">
+      <div class="contenitore">
+
+        <h2 class="titolo-sezione">Menu della serata</h2>
+
+        <div class="menu-serata">
+
+          <div class="portata">
+            <p class="tipo-portata">Aperitivo</p>
+            <p class="nome-portata">
+              Hi Barbie!
+              <span class="allergeni-numeri">1 · 7 · 12</span>
+            </p>
+          </div>
+
+          <div class="portata">
+            <p class="tipo-portata">Primo</p>
+            <p class="nome-portata">
+              Best Day Ever
+              <span class="allergeni-numeri">1 · 3 · 7</span>
+            </p>
+          </div>
+
+          <div class="portata">
+            <p class="tipo-portata">Secondo</p>
+            <p class="nome-portata">
+              Do You Guys Ever Think About Dying?
+              <span class="allergeni-numeri">4 · 7 · 12</span>
+            </p>
+          </div>
+
+          <div class="portata">
+            <p class="tipo-portata">Dolce</p>
+            <p class="nome-portata">
+              I’m Enough
+              <span class="allergeni-numeri">6 · 7 · 8</span>
+            </p>
+          </div>
+
+          <div class="legenda">
+            <h3>Legenda allergeni</h3>
+
+            <div class="legenda-grid">
+              <p><strong>1</strong> — Glutine</p>
+              <p><strong>2</strong> — Crostacei</p>
+              <p><strong>3</strong> — Uova</p>
+              <p><strong>4</strong> — Pesce</p>
+              <p><strong>5</strong> — Arachidi</p>
+              <p><strong>6</strong> — Soia</p>
+              <p><strong>7</strong> — Latte</p>
+              <p><strong>8</strong> — Frutta a guscio</p>
+              <p><strong>9</strong> — Sedano</p>
+              <p><strong>10</strong> — Senape</p>
+              <p><strong>11</strong> — Sesamo</p>
+              <p><strong>12</strong> — Solfiti</p>
+              <p><strong>13</strong> — Lupini</p>
+              <p><strong>14</strong> — Molluschi</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ESIGENZE ALIMENTARI -->
+
+    <section class="sezione">
+      <div class="contenitore">
+
+        <h2 class="titolo-sezione">Esigenze alimentari</h2>
+
+        <p class="esigenze-intro">
+          Per questa serata sono previsti:
+          <strong>Menu vegetariano</strong> e <strong>Menu celiaco</strong>.
+        </p>
+
+        <div class="menu-speciali">
+
+          <details class="menu-speciale">
+            <summary>Menu vegetariano</summary>
+            <p>
+              Il menu vegetariano proposto sarà anch’esso ispirato al film
+              e contiene i seguenti allergeni:
+              <strong>1 · 5 · 10</strong>.
+            </p>
+          </details>
+
+          <details class="menu-speciale">
+            <summary>Menu celiaco</summary>
+            <p>
+              Il menu celiaco proposto sarà anch’esso ispirato al film
+              e contiene i seguenti allergeni:
+              <strong>2 · 13</strong>.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM DI CONTATTO -->
+
+    <section class="sezione">
+      <div class="contenitore contatti-evento">
+
+        <h2 class="titolo-sezione">Hai qualche dubbio?</h2>
+
+        <p class="contatti-testo">
+          Non esitare a contattarci: ti risponderemo il prima possibile.
+        </p>
+
+        <form
+          class="contatti-form"
+          action="https://formsubmit.co/ilaria.bergo.bergonzi@gmail.com"
+          method="POST"
+        >
+
+          <input
+            type="hidden"
+            name="_subject"
+            value="Richiesta informazioni — Evento Barbie"
+          >
+
+          <input
+            type="hidden"
+            name="_template"
+            value="table"
+          >
+
+          <input
+            type="hidden"
+            name="Evento"
+            value="Barbie — 14 settembre 2026"
+          >
+
+          <input
+            class="campo-esca"
+            type="text"
+            name="_honey"
+            tabindex="-1"
+            autocomplete="off"
+          >
+
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="Nome"
+              autocomplete="given-name"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="cognome">Cognome</label>
+            <input
+              type="text"
+              id="cognome"
+              name="Cognome"
+              autocomplete="family-name"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="campo">
+            <label for="messaggio">Messaggio</label>
+            <textarea
+              id="messaggio"
+              name="Messaggio"
+              required
+            ></textarea>
+          </div>
+
+          <button class="invia" type="submit">
+            Invia messaggio
+          </button>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
