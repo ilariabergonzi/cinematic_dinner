@@ -15,11 +15,11 @@
 
     body {
       background: #0d0d0d;
-      color: #fff;
+      color: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* MENU */
+    /* MENU PRINCIPALE */
 
     .menu {
       width: 100%;
@@ -35,19 +35,20 @@
     }
 
     .menu a {
-      color: #fff;
+      color: #ffffff;
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 1px;
       text-decoration: none;
       text-transform: uppercase;
+      transition: opacity 0.3s ease;
     }
 
     .menu a:hover {
       opacity: 0.6;
     }
 
-    /* STRUTTURA */
+    /* STRUTTURA GENERALE */
 
     .contenitore {
       width: min(1000px, 90%);
@@ -130,26 +131,14 @@
     .elenco-menu {
       display: grid;
       gap: 15px;
-      margin: 35px 0;
-      padding: 30px;
-      border: 1px solid #444;
+      margin: 30px 0 0;
+      padding: 25px;
+      border: 1px solid #444444;
       background: #171717;
     }
 
     .elenco-menu strong {
       color: #ff62b1;
-    }
-
-    .legenda {
-      margin-top: 35px;
-      padding: 30px;
-      background: #171717;
-      border: 1px solid #444;
-    }
-
-    .legenda h3 {
-      margin-bottom: 22px;
-      text-transform: uppercase;
     }
 
     .legenda-grid {
@@ -160,22 +149,65 @@
       line-height: 1.4;
     }
 
-    .avviso-forte {
-      margin-top: 40px;
-      padding: 25px;
-      border-left: 5px solid #ff62b1;
-      background: #24151d;
-      font-size: 19px;
+    /* TENDINE */
+
+    .tendina {
+      margin-top: 25px;
+      border: 1px solid #444444;
+      background: #171717;
+    }
+
+    .tendina summary {
+      position: relative;
+      padding: 22px 65px 22px 25px;
+      font-size: 15px;
       font-weight: 800;
-      line-height: 1.5;
+      letter-spacing: 1px;
+      cursor: pointer;
+      list-style: none;
+      text-transform: uppercase;
+    }
+
+    .tendina summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tendina summary::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      color: #ff62b1;
+      font-size: 27px;
+      transform: translateY(-50%);
+    }
+
+    .tendina[open] summary::after {
+      content: "−";
+    }
+
+    .contenuto-tendina {
+      padding: 5px 25px 25px;
+    }
+
+    /* AVVISI */
+
+    .avviso-forte {
+      margin-top: 28px;
+      padding: 17px 20px;
+      border-left: 4px solid #ff62b1;
+      background: #24151d;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.4;
       text-transform: uppercase;
     }
 
     .avviso-spiegazione {
-      margin-top: 25px;
+      margin-top: 18px;
       color: #d0d0d0;
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     /* FORM */
@@ -209,11 +241,11 @@
     .campo textarea {
       width: 100%;
       padding: 16px;
-      border: 1px solid #555;
+      border: 1px solid #555555;
       border-radius: 0;
       outline: none;
       background: #181818;
-      color: #fff;
+      color: #ffffff;
       font: inherit;
     }
 
@@ -224,7 +256,7 @@
     }
 
     .campo textarea {
-      min-height: 170px;
+      min-height: 150px;
       resize: vertical;
     }
 
@@ -238,6 +270,9 @@
       letter-spacing: 1px;
       cursor: pointer;
       text-transform: uppercase;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
     }
 
     .pulsante:hover {
@@ -247,6 +282,16 @@
 
     .campo-esca {
       display: none;
+    }
+
+    /* FORM CONTATTO A TENDINA */
+
+    .contatto-tendina {
+      margin-top: 28px;
+    }
+
+    .contatto-tendina .form {
+      margin-top: 15px;
     }
 
     /* PARTECIPANTI */
@@ -259,7 +304,7 @@
 
     .partecipante {
       padding: 25px;
-      border: 1px solid #444;
+      border: 1px solid #444444;
       background: #171717;
     }
 
@@ -271,7 +316,7 @@
     }
 
     .nota-partecipanti {
-      color: #aaa;
+      color: #aaaaaa;
       font-size: 14px;
       line-height: 1.5;
     }
@@ -284,7 +329,7 @@
       gap: 14px;
       margin-top: 15px;
       padding: 22px;
-      border: 1px solid #555;
+      border: 1px solid #555555;
       background: #171717;
     }
 
@@ -304,13 +349,13 @@
     }
 
     .nota-prototipo {
-      color: #aaa;
+      color: #aaaaaa;
       font-size: 14px;
       line-height: 1.5;
       text-align: center;
     }
 
-    /* TELEFONO */
+    /* VERSIONE TELEFONO */
 
     @media (max-width: 750px) {
       .menu {
@@ -350,11 +395,26 @@
       .sezione {
         padding: 65px 0;
       }
+
+      .tendina summary {
+        padding: 20px 55px 20px 20px;
+        font-size: 14px;
+      }
+
+      .tendina summary::after {
+        right: 20px;
+      }
+
+      .contenuto-tendina {
+        padding: 5px 20px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- MENU PRINCIPALE -->
 
   <nav class="menu">
     <ul>
@@ -414,31 +474,48 @@
         </p>
 
         <div class="elenco-menu">
-          <p><strong>Menu standard:</strong> 1 · 3 · 4 · 6 · 7 · 8 · 12</p>
-          <p><strong>Menu vegetariano:</strong> 1 · 5 · 10</p>
-          <p><strong>Menu celiaco:</strong> 2 · 13</p>
+          <p>
+            <strong>Menu standard:</strong>
+            1 · 3 · 4 · 6 · 7 · 8 · 12
+          </p>
+
+          <p>
+            <strong>Menu vegetariano:</strong>
+            1 · 5 · 10
+          </p>
+
+          <p>
+            <strong>Menu celiaco:</strong>
+            2 · 13
+          </p>
         </div>
 
-        <div class="legenda">
-          <h3>Legenda allergeni</h3>
+        <!-- LEGENDA A TENDINA -->
 
-          <div class="legenda-grid">
-            <p><strong>1</strong> — Glutine</p>
-            <p><strong>2</strong> — Crostacei</p>
-            <p><strong>3</strong> — Uova</p>
-            <p><strong>4</strong> — Pesce</p>
-            <p><strong>5</strong> — Arachidi</p>
-            <p><strong>6</strong> — Soia</p>
-            <p><strong>7</strong> — Latte</p>
-            <p><strong>8</strong> — Frutta a guscio</p>
-            <p><strong>9</strong> — Sedano</p>
-            <p><strong>10</strong> — Senape</p>
-            <p><strong>11</strong> — Sesamo</p>
-            <p><strong>12</strong> — Solfiti</p>
-            <p><strong>13</strong> — Lupini</p>
-            <p><strong>14</strong> — Molluschi</p>
+        <details class="tendina">
+          <summary>Consulta la legenda degli allergeni</summary>
+
+          <div class="contenuto-tendina">
+            <div class="legenda-grid">
+              <p><strong>1</strong> — Glutine</p>
+              <p><strong>2</strong> — Crostacei</p>
+              <p><strong>3</strong> — Uova</p>
+              <p><strong>4</strong> — Pesce</p>
+              <p><strong>5</strong> — Arachidi</p>
+              <p><strong>6</strong> — Soia</p>
+              <p><strong>7</strong> — Latte</p>
+              <p><strong>8</strong> — Frutta a guscio</p>
+              <p><strong>9</strong> — Sedano</p>
+              <p><strong>10</strong> — Senape</p>
+              <p><strong>11</strong> — Sesamo</p>
+              <p><strong>12</strong> — Solfiti</p>
+              <p><strong>13</strong> — Lupini</p>
+              <p><strong>14</strong> — Molluschi</p>
+            </div>
           </div>
-        </div>
+        </details>
+
+        <!-- AVVISI IMPORTANTI -->
 
         <p class="avviso-forte">
           Le alternative disponibili per questa serata sono esclusivamente
@@ -453,89 +530,105 @@
           sia possibile gestire la specifica esigenza in sicurezza.
         </p>
 
-        <!-- FORM DI CONTATTO -->
+        <!-- FORM DI CONTATTO A TENDINA -->
 
-        <form
-          class="form"
-          action="https://formsubmit.co/ilaria.bergo.bergonzi@gmail.com"
-          method="POST"
-        >
+        <details class="tendina contatto-tendina">
+          <summary>Hai un dubbio sugli allergeni? Contattaci</summary>
 
-          <input
-            type="hidden"
-            name="_subject"
-            value="Richiesta allergeni — Evento Barbie"
-          >
+          <div class="contenuto-tendina">
 
-          <input
-            type="hidden"
-            name="_template"
-            value="table"
-          >
-
-          <input
-            type="hidden"
-            name="Evento"
-            value="Barbie — 14 settembre 2026"
-          >
-
-          <input
-            class="campo-esca"
-            type="text"
-            name="_honey"
-            tabindex="-1"
-            autocomplete="off"
-          >
-
-          <div class="riga-doppia">
-            <div class="campo">
-              <label for="contatto-nome">Nome</label>
-              <input
-                id="contatto-nome"
-                name="Nome"
-                type="text"
-                required
-              >
-            </div>
-
-            <div class="campo">
-              <label for="contatto-cognome">Cognome</label>
-              <input
-                id="contatto-cognome"
-                name="Cognome"
-                type="text"
-                required
-              >
-            </div>
-          </div>
-
-          <div class="campo">
-            <label for="contatto-email">Email</label>
-            <input
-              id="contatto-email"
-              name="email"
-              type="email"
-              required
+            <form
+              class="form"
+              action="https://formsubmit.co/ilaria.bergo.bergonzi@gmail.com"
+              method="POST"
             >
+
+              <input
+                type="hidden"
+                name="_subject"
+                value="Richiesta allergeni — Evento Barbie"
+              >
+
+              <input
+                type="hidden"
+                name="_template"
+                value="table"
+              >
+
+              <input
+                type="hidden"
+                name="Evento"
+                value="Barbie — 14 settembre 2026"
+              >
+
+              <input
+                class="campo-esca"
+                type="text"
+                name="_honey"
+                tabindex="-1"
+                autocomplete="off"
+              >
+
+              <div class="riga-doppia">
+
+                <div class="campo">
+                  <label for="contatto-nome">Nome</label>
+
+                  <input
+                    id="contatto-nome"
+                    name="Nome"
+                    type="text"
+                    autocomplete="given-name"
+                    required
+                  >
+                </div>
+
+                <div class="campo">
+                  <label for="contatto-cognome">Cognome</label>
+
+                  <input
+                    id="contatto-cognome"
+                    name="Cognome"
+                    type="text"
+                    autocomplete="family-name"
+                    required
+                  >
+                </div>
+
+              </div>
+
+              <div class="campo">
+                <label for="contatto-email">Email</label>
+
+                <input
+                  id="contatto-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                >
+              </div>
+
+              <div class="campo">
+                <label for="contatto-messaggio">
+                  Descrivi l’allergia o l’esigenza alimentare
+                </label>
+
+                <textarea
+                  id="contatto-messaggio"
+                  name="Messaggio"
+                  required
+                ></textarea>
+              </div>
+
+              <button class="pulsante" type="submit">
+                Chiedi informazioni
+              </button>
+
+            </form>
+
           </div>
-
-          <div class="campo">
-            <label for="contatto-messaggio">
-              Descrivi l’allergia o l’esigenza alimentare
-            </label>
-
-            <textarea
-              id="contatto-messaggio"
-              name="Messaggio"
-              required
-            ></textarea>
-          </div>
-
-          <button class="pulsante" type="submit">
-            Chiedi informazioni
-          </button>
-
-        </form>
+        </details>
 
       </div>
     </section>
@@ -545,52 +638,66 @@
     <section class="sezione">
       <div class="contenitore">
 
-        <h2 class="titolo-sezione">Prenota il tuo tavolo</h2>
+        <h2 class="titolo-sezione">
+          Prenota il tuo tavolo
+        </h2>
 
         <form class="form" id="form-prenotazione">
 
           <div class="riga-doppia">
+
             <div class="campo">
               <label for="nome-prenotazione">Nome</label>
+
               <input
                 id="nome-prenotazione"
                 name="nome"
                 type="text"
+                autocomplete="given-name"
                 required
               >
             </div>
 
             <div class="campo">
               <label for="cognome-prenotazione">Cognome</label>
+
               <input
                 id="cognome-prenotazione"
                 name="cognome"
                 type="text"
+                autocomplete="family-name"
                 required
               >
             </div>
+
           </div>
 
           <div class="riga-doppia">
+
             <div class="campo">
               <label for="email-prenotazione">Email</label>
+
               <input
                 id="email-prenotazione"
                 name="email"
                 type="email"
+                autocomplete="email"
                 required
               >
             </div>
 
             <div class="campo">
               <label for="telefono">Numero di telefono</label>
+
               <input
                 id="telefono"
                 name="telefono"
                 type="tel"
+                autocomplete="tel"
                 required
               >
             </div>
+
           </div>
 
           <div class="campo">
@@ -618,7 +725,14 @@
             desiderato per ogni persona inclusa nella prenotazione.
           </p>
 
-          <div class="partecipanti" id="elenco-partecipanti"></div>
+          <!-- QUI COMPAIONO AUTOMATICAMENTE I PARTECIPANTI -->
+
+          <div
+            class="partecipanti"
+            id="elenco-partecipanti"
+          ></div>
+
+          <!-- CONFERMA ALLERGENI -->
 
           <div class="conferma">
             <input
@@ -651,9 +765,14 @@
   </main>
 
   <script>
-    const selezioneNumero = document.getElementById("numero-partecipanti");
-    const elencoPartecipanti = document.getElementById("elenco-partecipanti");
-    const formPrenotazione = document.getElementById("form-prenotazione");
+    const selezioneNumero =
+      document.getElementById("numero-partecipanti");
+
+    const elencoPartecipanti =
+      document.getElementById("elenco-partecipanti");
+
+    const formPrenotazione =
+      document.getElementById("form-prenotazione");
 
     selezioneNumero.addEventListener("change", function () {
       const numero = Number(this.value);
@@ -669,6 +788,7 @@
           <h3>Partecipante ${i}</h3>
 
           <div class="riga-doppia">
+
             <div class="campo">
               <label for="partecipante-${i}">
                 Nome e cognome
@@ -698,6 +818,7 @@
                 <option value="celiaco">Menu celiaco</option>
               </select>
             </div>
+
           </div>
         `;
 
