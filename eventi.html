@@ -19,11 +19,41 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .eventi {
-      width: min(1200px, 90%);
-      margin: 0 auto;
-      padding: 90px 0 110px;
+    /* MENU */
+
+    .menu {
+      width: 100%;
+      padding: 28px 5%;
+      border-bottom: 1px solid #2c2c2c;
     }
+    
+    .menu ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 42px;
+      list-style: none;
+    }
+    
+    .menu a {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+    
+    .menu a:hover {
+      opacity: 0.6;
+    }
+    
+        .eventi {
+          width: min(1200px, 90%);
+          margin: 0 auto;
+          padding: 90px 0 110px;
+        }
 
     .eventi h1 {
       margin-bottom: 60px;
@@ -93,7 +123,25 @@
       color: #ffffff;
       font-weight: 700;
     }
-
+    
+    @media (max-width: 750px) {
+      .menu {
+        padding: 22px 20px;
+        overflow-x: auto;
+      }
+    
+      .menu ul {
+        width: max-content;
+        justify-content: flex-start;
+        gap: 25px;
+      }
+    
+      .menu a {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+    }
+    
     @media (max-width: 850px) {
       .eventi {
         padding-top: 65px;
@@ -118,6 +166,16 @@
 </head>
 
 <body>
+ 
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="progetto.html">Il progetto</a></li>
+      <li><a href="collabora.html">Collabora con noi</a></li>
+      <li><a href="eventi.html">Eventi</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
 
   <main class="eventi">
 
