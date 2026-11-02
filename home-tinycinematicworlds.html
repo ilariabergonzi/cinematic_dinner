@@ -18,13 +18,13 @@
     :root {
       color-scheme: only light;
 
-      --pergamena: #f3ebd9;
-      --carta: #faf5e9;
-      --carbone: #30352f;
+      --carta: #f3ebd9;
+      --chiaro: #faf5e9;
+      --testo: #30352f;
       --verde: #526348;
       --argilla: #c68f68;
-      --azzurro: #627e8c;
       --bordo: #d2cab9;
+      --azzurro: #627e8c;
     }
 
     * {
@@ -33,24 +33,15 @@
       padding: 0;
     }
 
-    html {
-      background-color: var(--pergamena);
-    }
-
     body {
-      background-color: var(--pergamena);
-      color: var(--carbone);
+      background-color: var(--carta);
+      color: var(--testo);
       font-family: "DM Sans", Arial, sans-serif;
       line-height: 1.5;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
     a {
-      color: var(--carbone);
+      color: inherit;
       text-decoration: none;
     }
 
@@ -59,56 +50,55 @@
       outline-offset: 5px;
     }
 
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
     /* TESTATA */
 
     .testata {
-      position: relative;
-      z-index: 2;
-      width: 100%;
       min-height: 145px;
       padding: 30px 5%;
 
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 35px;
+      justify-content: space-between;
+      gap: 30px;
 
-      background-color: var(--pergamena);
+      background-color: var(--carta);
       border-bottom: 1px solid var(--bordo);
     }
 
     .menu {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 25px;
+      gap: 24px;
     }
 
     .menu a {
-      color: var(--carbone);
+      color: var(--testo);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.5px;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
     .menu a:hover {
       text-decoration: underline;
-      text-underline-offset: 6px;
+      text-underline-offset: 5px;
     }
 
     .marchio {
       flex-shrink: 0;
-      color: var(--carbone);
       text-align: center;
     }
 
     .logo {
       display: block;
-      color: var(--carbone);
+      color: var(--testo);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(34px, 3.4vw, 52px);
+      font-size: clamp(32px, 3.4vw, 52px);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -2px;
@@ -118,120 +108,90 @@
     .sottotitolo {
       display: block;
       margin-top: 9px;
-      color: var(--carbone);
+      color: var(--testo);
       font-size: 12px;
-      line-height: 1.5;
     }
 
-    /* HERO A TUTTA LARGHEZZA */
+    /* HERO:
+       SFONDO A TUTTA LARGHEZZA,
+       ISOLE INTERE SENZA RITAGLI */
 
     .hero {
-      position: relative;
-      isolation: isolate;
-
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-
-      width: 100%;
-      min-height: clamp(620px, 80vh, 900px);
-
-      overflow: hidden;
-      background-color: var(--pergamena);
-      color: var(--carbone);
-    }
-
-    .hero-immagine {
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-
-      width: 100%;
-      height: 100%;
-      max-width: none;
-
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    /* Sfumatura leggera, senza nascondere le isole */
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-
-      background: linear-gradient(
-        to right,
-        rgba(243, 235, 217, 0) 48%,
-        rgba(243, 235, 217, 0.15) 62%,
-        rgba(243, 235, 217, 0.3) 100%
+      background: radial-gradient(
+        ellipse at 25% 45%,
+        #fff9eb 0%,
+        var(--carta) 65%
       );
+
+      border-bottom: 1px solid var(--bordo);
+    }
+
+    .hero-contenuto {
+      width: min(1500px, 100%);
+      min-height: 620px;
+      margin: 0 auto;
+      padding: 35px 5% 45px;
+
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.12fr)
+        minmax(0, 1fr);
+
+      gap: 35px;
+      align-items: center;
+    }
+
+    .hero-illustrazione {
+      min-width: 0;
+    }
+
+    .hero-illustrazione img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
     }
 
     .hero-testo {
-      position: relative;
-      z-index: 1;
-
-      width: 46%;
-      padding: 65px 5% 65px 25px;
-
-      color: var(--carbone);
+      min-width: 0;
+      padding: 25px 0;
+      color: var(--testo);
     }
 
     .etichetta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-
       color: var(--verde);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 1.8px;
+      letter-spacing: 1.6px;
       text-transform: uppercase;
     }
 
-    .etichetta::before {
-      content: "";
-      flex-shrink: 0;
-      width: 9px;
-      height: 9px;
+    h1 {
+      margin: 24px 0 32px;
 
-      border-radius: 50%;
-      background-color: var(--verde);
-      box-shadow: 0 0 0 5px #52634818;
-    }
-
-    .hero h1 {
-      margin: 26px 0 35px;
-
-      color: var(--carbone);
+      color: var(--testo);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(44px, 4.1vw, 70px);
+      font-size: clamp(40px, 4.1vw, 66px);
       font-weight: 800;
       line-height: 1.06;
-      letter-spacing: -2.5px;
+      letter-spacing: -2.3px;
     }
 
     .bottone {
       display: inline-flex;
       align-items: center;
-      justify-content: space-between;
       gap: 30px;
 
       padding: 16px 25px;
-      border: 1px solid var(--carbone);
+      border: 1px solid var(--testo);
       border-radius: 30px;
 
       background-color: var(--argilla);
-      color: var(--carbone);
+      color: var(--testo);
 
       font-size: 14px;
       font-weight: 700;
 
-      box-shadow: 3px 4px 0 var(--carbone);
+      box-shadow: 3px 4px 0 var(--testo);
 
       transition:
         transform 0.2s ease,
@@ -240,35 +200,29 @@
 
     .bottone:hover {
       transform: translate(2px, 2px);
-      box-shadow: 1px 2px 0 var(--carbone);
+      box-shadow: 1px 2px 0 var(--testo);
     }
 
     /* PROSSIMI EVENTI */
 
     .eventi {
-      padding: 60px 5% 75px;
-      background-color: var(--pergamena);
-      color: var(--carbone);
-      border-top: 1px solid var(--bordo);
-    }
-
-    .eventi-contenuto {
-      max-width: 1320px;
+      max-width: 1420px;
       margin: 0 auto;
+      padding: 60px 5% 75px;
     }
 
     .titolo-sezione {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 30px;
+      gap: 25px;
       margin-bottom: 35px;
     }
 
-    .titolo-sezione h2 {
-      color: var(--carbone);
+    h2 {
+      color: var(--testo);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(34px, 3.5vw, 48px);
+      font-size: clamp(32px, 3.5vw, 48px);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -1.5px;
@@ -276,27 +230,24 @@
 
     .titolo-sezione p {
       margin-top: 12px;
-      color: var(--carbone);
       font-size: 14px;
     }
 
     .legenda {
       display: flex;
       align-items: center;
-      gap: 12px;
-
-      color: var(--carbone);
+      gap: 10px;
       font-size: 12px;
     }
 
     .legenda::before {
       content: "";
       flex-shrink: 0;
-      width: 40px;
+      width: 35px;
       border-top: 2px dashed var(--azzurro);
     }
 
-    /* GRIGLIA DELLE ISOLE */
+    /* GRIGLIA DELLE DESTINAZIONI */
 
     .griglia {
       display: grid;
@@ -306,13 +257,13 @@
 
     .evento {
       position: relative;
+      min-width: 0;
+
       display: flex;
       flex-direction: column;
-      min-width: 0;
-      color: var(--carbone);
     }
 
-    /* Percorso che collega le tre destinazioni */
+    /* PERCORSI TRA LE ISOLE */
 
     .evento:not(:last-child)::after {
       content: "";
@@ -330,12 +281,13 @@
       pointer-events: none;
     }
 
+    /* IMMAGINI DEGLI EVENTI */
+
     .isola {
       position: relative;
-      overflow: hidden;
       aspect-ratio: 2 / 3;
+      overflow: hidden;
 
-      background-color: var(--pergamena);
       border-radius: 16px 16px 0 0;
     }
 
@@ -343,11 +295,12 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      transition: transform 0.35s ease;
+
+      transition: transform 0.3s ease;
     }
 
     .evento:hover .isola img {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
     }
 
     .numero {
@@ -356,52 +309,48 @@
       left: 16px;
       z-index: 1;
 
-      min-width: 54px;
       padding: 8px 10px;
-
       border: 1px solid var(--verde);
       border-radius: 12px;
 
-      background-color: var(--carta);
+      background-color: var(--chiaro);
       color: var(--verde);
 
       font-family: "Bricolage Grotesque", Arial, sans-serif;
       font-size: 30px;
       font-weight: 800;
       line-height: 1;
-      text-align: center;
     }
 
     /* INFORMAZIONI DEGLI EVENTI */
 
     .info {
       flex: 1;
+
       display: flex;
       flex-direction: column;
 
       padding: 23px;
-
-      background-color: var(--carta);
-      color: var(--carbone);
-
       border: 1px solid var(--bordo);
-      border-top: none;
+      border-top: 0;
       border-radius: 0 0 16px 16px;
+
+      background-color: var(--chiaro);
+      color: var(--testo);
     }
 
     .destinazione {
       color: var(--verde);
       font-size: 10px;
       font-weight: 700;
-      line-height: 1.5;
-      letter-spacing: 1.3px;
+      letter-spacing: 1.1px;
       text-transform: uppercase;
     }
 
-    .info h3 {
+    h3 {
       margin: 12px 0 10px;
 
-      color: var(--carbone);
+      color: var(--testo);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
       font-size: 28px;
       font-weight: 700;
@@ -410,50 +359,25 @@
     }
 
     .luogo {
-      color: var(--carbone);
       font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .dettagli {
-      margin-top: auto;
-      padding-top: 20px;
-      padding-bottom: 22px;
     }
 
     .data {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      color: var(--carbone);
-    }
+      margin-top: auto;
+      padding: 20px 0 22px;
 
-    .data span {
-      color: var(--verde);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .data strong {
-      color: var(--carbone);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
     }
 
     .scopri {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 15px;
 
       padding: 13px 17px;
-      border: 1px solid var(--carbone);
+      border: 1px solid var(--testo);
       border-radius: 25px;
-
-      background-color: var(--carta);
-      color: var(--carbone);
 
       font-size: 13px;
       font-weight: 700;
@@ -467,17 +391,13 @@
 
     .nota {
       margin-top: 30px;
-      color: var(--carbone);
       font-size: 11px;
     }
 
     footer {
       padding: 25px 5%;
-
-      background-color: var(--pergamena);
-      color: var(--carbone);
-
       border-top: 1px solid var(--bordo);
+
       text-align: center;
       font-size: 12px;
     }
@@ -498,6 +418,15 @@
         font-size: 42px;
       }
 
+      .hero-contenuto {
+        min-height: 540px;
+        gap: 20px;
+      }
+
+      h1 {
+        font-size: clamp(36px, 4.5vw, 50px);
+      }
+
       .griglia {
         gap: 24px;
       }
@@ -510,33 +439,18 @@
         padding: 18px;
       }
 
-      .info h3 {
+      h3 {
         font-size: 25px;
       }
     }
 
-    @media (min-width: 761px) and (max-width: 1100px) {
-      .hero {
-        min-height: 620px;
-      }
-
-      .hero-testo {
-        width: 48%;
-        padding: 55px 4% 55px 20px;
-      }
-
-      .hero h1 {
-        font-size: clamp(40px, 4.5vw, 50px);
-        letter-spacing: -1.8px;
-      }
-    }
-
-    /* TELEFONO */
+    /* TELEFONO:
+       ISOLE INTERE SOPRA, TESTO SOTTO */
 
     @media (max-width: 760px) {
       .testata {
-        min-height: auto;
-        padding: 28px 5%;
+        min-height: 0;
+        padding: 26px 5%;
       }
 
       .logo {
@@ -557,62 +471,37 @@
         font-size: 10px;
       }
 
-      /* L'isola principale rimane nella parte alta */
-
-      .hero {
-        align-items: flex-end;
-        justify-content: flex-start;
-
-        min-height: 780px;
-        min-height: clamp(740px, 100svh, 900px);
+      .hero-contenuto {
+        min-height: 0;
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 22px 6% 45px;
       }
 
-      .hero-immagine {
-        position: absolute;
-        inset: 0;
+      .hero-illustrazione {
+        width: min(100%, 460px);
+        margin: 0 auto;
+      }
 
+      .hero-illustrazione img {
         width: 100%;
-        height: 100%;
-
-        object-fit: cover;
-        object-position: 27% top;
-      }
-
-      /* Sfumatura sotto l'illustrazione */
-
-      .hero::before {
-        background: linear-gradient(
-          to bottom,
-          rgba(243, 235, 217, 0) 38%,
-          rgba(243, 235, 217, 0.15) 48%,
-          rgba(243, 235, 217, 0.94) 65%,
-          #f3ebd9 82%
-        );
+        height: auto;
       }
 
       .hero-testo {
-        width: 100%;
-        padding: 360px 7% 45px;
-        background: transparent;
+        padding: 8px 1% 0;
       }
 
-      .hero .etichetta {
+      h1 {
+        max-width: 540px;
+        margin: 20px 0 28px;
+
+        font-size: clamp(36px, 8vw, 54px);
+        letter-spacing: -1.7px;
+      }
+
+      .etichetta {
         font-size: 10px;
-        letter-spacing: 1.5px;
-      }
-
-      .hero h1 {
-        max-width: 520px;
-        margin: 22px 0 28px;
-
-        font-size: clamp(36px, 8vw, 55px);
-        line-height: 1.05;
-        letter-spacing: -1.8px;
-      }
-
-      .hero .bottone {
-        padding: 15px 23px;
-        font-size: 13px;
       }
 
       .eventi {
@@ -621,7 +510,6 @@
 
       .titolo-sezione {
         display: block;
-        margin-bottom: 28px;
       }
 
       .legenda {
@@ -631,11 +519,11 @@
       .griglia {
         grid-template-columns: 1fr;
         max-width: 440px;
-        margin: auto;
+        margin: 0 auto;
         gap: 65px;
       }
 
-      /* Percorso verticale tra le schede */
+      /* PERCORSO VERTICALE */
 
       .evento:not(:last-child)::after {
         top: auto;
@@ -645,7 +533,7 @@
         width: 0;
         height: 32px;
 
-        border-top: none;
+        border-top: 0;
         border-left: 2px dashed var(--azzurro);
         border-radius: 0;
 
@@ -656,7 +544,7 @@
         padding: 23px;
       }
 
-      .info h3 {
+      h3 {
         font-size: 28px;
       }
     }
@@ -698,31 +586,42 @@
 
   <main>
 
-    <!-- IMMAGINE PRINCIPALE -->
+    <!-- ISOLE A TRIANGOLO E PRESENTAZIONE -->
 
     <section class="hero" aria-labelledby="titolo-home">
 
-      <img
-        class="hero-immagine"
-        src="images/hero-tiny.jpg"
-        alt="Un arcipelago di isole cinematografiche collegate da ponti"
-        fetchpriority="high"
-      >
+      <div class="hero-contenuto">
 
-      <div class="hero-testo">
+        <div class="hero-illustrazione">
 
-        <span class="etichetta">Atlante delle serate</span>
+          <img
+            src="images/hero-tiny.png"
+            width="1254"
+            height="1254"
+            alt="Tre isole cinematografiche a triangolo, collegate da ponti: osservatorio, villa rosa e palazzo inca"
+            fetchpriority="high"
+          >
 
-        <h1 id="titolo-home">
-          Dallo schermo<br>
-          al piatto,<br>
-          oltre ogni confine
-        </h1>
+        </div>
 
-        <a class="bottone" href="progetto.html">
-          Scopri il format
-          <span aria-hidden="true">→</span>
-        </a>
+        <div class="hero-testo">
+
+          <span class="etichetta">
+            Atlante delle serate
+          </span>
+
+          <h1 id="titolo-home">
+            Dallo schermo<br>
+            al piatto,<br>
+            oltre ogni confine
+          </h1>
+
+          <a class="bottone" href="progetto.html">
+            Scopri il format
+            <span aria-hidden="true">→</span>
+          </a>
+
+        </div>
 
       </div>
 
@@ -732,160 +631,141 @@
 
     <section class="eventi" aria-labelledby="titolo-eventi">
 
-      <div class="eventi-contenuto">
+      <div class="titolo-sezione">
 
-        <div class="titolo-sezione">
-
-          <div>
-            <h2 id="titolo-eventi">Prossimi eventi</h2>
-            <p>Tre film. Tre isole. Un viaggio da condividere.</p>
-          </div>
-
-          <span class="legenda">
-            Segui il percorso, scegli la tua storia
-          </span>
-
+        <div>
+          <h2 id="titolo-eventi">Prossimi eventi</h2>
+          <p>Tre film. Tre isole. Un viaggio da condividere.</p>
         </div>
 
-        <div class="griglia">
-
-          <!-- BARBIE -->
-
-          <a class="evento" href="evento-barbie.html">
-
-            <div class="isola">
-
-              <span class="numero" aria-hidden="true">01</span>
-
-              <img
-                src="images/barbie-tiny.jpg"
-                alt="Isola di Barbie con villa rosa, piscina e cinema all’aperto"
-                loading="lazy"
-              >
-
-            </div>
-
-            <div class="info">
-
-              <span class="destinazione">
-                Destinazione 01 · Soncino
-              </span>
-
-              <h3>Barbie</h3>
-
-              <p class="luogo">
-                Ristorante Blabla · Soncino
-              </p>
-
-              <div class="dettagli">
-                <div class="data">
-                  <span>La partenza</span>
-                  <strong>14 settembre</strong>
-                </div>
-              </div>
-
-              <span class="scopri">
-                Esplora la serata
-                <span aria-hidden="true">↗</span>
-              </span>
-
-            </div>
-
-          </a>
-
-          <!-- INTERSTELLAR -->
-
-          <a class="evento" href="evento-interstellar.html">
-
-            <div class="isola">
-
-              <span class="numero" aria-hidden="true">02</span>
-
-              <img
-                src="images/interstellar-tiny.jpg"
-                alt="Isola di Interstellar con osservatorio, pianeti e tavoli davanti allo schermo"
-                loading="lazy"
-              >
-
-            </div>
-
-            <div class="info">
-
-              <span class="destinazione">
-                Destinazione 02 · Lonato del Garda
-              </span>
-
-              <h3>Interstellar</h3>
-
-              <p class="luogo">
-                Ristorante Pippo · Lonato del Garda
-              </p>
-
-              <div class="dettagli">
-                <div class="data">
-                  <span>La partenza</span>
-                  <strong>15 settembre</strong>
-                </div>
-              </div>
-
-              <span class="scopri">
-                Esplora la serata
-                <span aria-hidden="true">↗</span>
-              </span>
-
-            </div>
-
-          </a>
-
-          <!-- LE FOLLIE DELL'IMPERATORE -->
-
-          <a class="evento" href="evento-follie-imperatore.html">
-
-            <div class="isola">
-
-              <span class="numero" aria-hidden="true">03</span>
-
-              <img
-                src="images/follie-tiny.jpg"
-                alt="Isola delle Follie dell’imperatore con palazzo inca, lama e tavoli immersi nella vegetazione"
-                loading="lazy"
-              >
-
-            </div>
-
-            <div class="info">
-
-              <span class="destinazione">
-                Destinazione 03 · Brescia
-              </span>
-
-              <h3>Le follie dell’imperatore</h3>
-
-              <p class="luogo">
-                Ristorante Cucu · Brescia
-              </p>
-
-              <div class="dettagli">
-                <div class="data">
-                  <span>La partenza</span>
-                  <strong>16 settembre</strong>
-                </div>
-              </div>
-
-              <span class="scopri">
-                Esplora la serata
-                <span aria-hidden="true">↗</span>
-              </span>
-
-            </div>
-
-          </a>
-
-        </div>
-
-        <p class="nota">Eventi di esempio.</p>
+        <span class="legenda">
+          Segui il percorso, scegli la tua storia
+        </span>
 
       </div>
+
+      <div class="griglia">
+
+        <!-- BARBIE -->
+
+        <a class="evento" href="evento-barbie.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">01</span>
+
+            <img
+              src="images/barbie-tiny.jpg"
+              alt="Isola cinematografica ispirata a Barbie"
+              loading="lazy"
+            >
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 01 · Soncino
+            </span>
+
+            <h3>Barbie</h3>
+
+            <p class="luogo">
+              Ristorante Blabla · Soncino
+            </p>
+
+            <p class="data">14 settembre</p>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+        <!-- INTERSTELLAR -->
+
+        <a class="evento" href="evento-interstellar.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">02</span>
+
+            <img
+              src="images/interstellar-tiny.jpg"
+              alt="Isola cinematografica ispirata a Interstellar"
+              loading="lazy"
+            >
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 02 · Lonato del Garda
+            </span>
+
+            <h3>Interstellar</h3>
+
+            <p class="luogo">
+              Ristorante Pippo · Lonato del Garda
+            </p>
+
+            <p class="data">15 settembre</p>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+        <!-- LE FOLLIE DELL'IMPERATORE -->
+
+        <a class="evento" href="evento-follie-imperatore.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">03</span>
+
+            <img
+              src="images/follie-tiny.jpg"
+              alt="Isola cinematografica ispirata a Le follie dell’imperatore"
+              loading="lazy"
+            >
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 03 · Brescia
+            </span>
+
+            <h3>Le follie dell’imperatore</h3>
+
+            <p class="luogo">
+              Ristorante Cucu · Brescia
+            </p>
+
+            <p class="data">16 settembre</p>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+      </div>
+
+      <p class="nota">Eventi di esempio.</p>
 
     </section>
 
