@@ -13,7 +13,7 @@
   >
 
   <style>
-    /* PALETTE */
+    /* COLORI */
 
     :root {
       color-scheme: only light;
@@ -68,10 +68,12 @@
       width: 100%;
       min-height: 145px;
       padding: 32px 5%;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 35px;
+
       background-color: var(--pergamena);
       border-bottom: 1px solid var(--bordo);
     }
@@ -122,47 +124,62 @@
       line-height: 1.5;
     }
 
-    /* IMMAGINE PRINCIPALE */
+    /* IMMAGINE PRINCIPALE A TUTTA LARGHEZZA */
 
     .hero {
       position: relative;
       isolation: isolate;
-      min-height: 680px;
+
       display: flex;
       align-items: center;
       justify-content: flex-end;
+
+      width: 100%;
+      min-height: clamp(620px, 80vh, 900px);
+
       overflow: hidden;
       background-color: var(--pergamena);
+      color: var(--carbone);
     }
 
     .hero-immagine {
       position: absolute;
       inset: 0;
-      z-index: -2;
+      z-index: -3;
+
       width: 100%;
       height: 100%;
       max-width: none;
-      object-fit: contain;
-      object-position: left center;
 
-      -webkit-mask-image: linear-gradient(
-        to right,
-        black 50%,
-        transparent 78%
-      );
+      object-fit: cover;
+      object-position: center center;
+    }
 
-      mask-image: linear-gradient(
+    /* Sfumatura per accompagnare il testo */
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+
+      background: linear-gradient(
         to right,
-        black 50%,
-        transparent 78%
+        rgba(243, 235, 217, 0) 35%,
+        rgba(243, 235, 217, 0.35) 50%,
+        rgba(243, 235, 217, 0.94) 65%,
+        #f3ebd9 100%
       );
     }
 
     .hero-testo {
       position: relative;
       z-index: 1;
+
       width: 46%;
-      padding: 65px 5% 65px 25px;
+      padding: 70px 5% 70px 25px;
+
       color: var(--carbone);
     }
 
@@ -170,10 +187,11 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
+
       color: var(--verde);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
     }
 
@@ -182,16 +200,18 @@
       flex-shrink: 0;
       width: 9px;
       height: 9px;
+
       border-radius: 50%;
       background-color: var(--verde);
       box-shadow: 0 0 0 5px #52634818;
     }
 
     .hero h1 {
-      margin: 25px 0 34px;
+      margin: 26px 0 35px;
+
       color: var(--carbone);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(42px, 4.2vw, 66px);
+      font-size: clamp(44px, 4.1vw, 70px);
       font-weight: 800;
       line-height: 1.06;
       letter-spacing: -2.5px;
@@ -202,14 +222,19 @@
       align-items: center;
       justify-content: space-between;
       gap: 30px;
+
       padding: 16px 25px;
       border: 1px solid var(--carbone);
       border-radius: 30px;
+
       background-color: var(--argilla);
       color: var(--carbone);
+
       font-size: 14px;
       font-weight: 700;
+
       box-shadow: 3px 4px 0 var(--carbone);
+
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
@@ -261,6 +286,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+
       color: var(--carbone);
       font-size: 12px;
     }
@@ -272,7 +298,7 @@
       border-top: 2px dashed var(--azzurro);
     }
 
-    /* LE TRE DESTINAZIONI */
+    /* GRIGLIA DELLE ISOLE */
 
     .griglia {
       display: grid;
@@ -288,18 +314,21 @@
       color: var(--carbone);
     }
 
-    /* Collegamenti tra le isole */
+    /* Percorso tra le destinazioni */
 
     .evento:not(:last-child)::after {
       content: "";
       position: absolute;
       top: 31%;
       left: 100%;
+
       width: 36px;
       height: 25px;
+
       border-top: 2px dashed var(--azzurro);
       border-radius: 50%;
       transform: rotate(-15deg);
+
       pointer-events: none;
     }
 
@@ -307,6 +336,7 @@
       position: relative;
       overflow: hidden;
       aspect-ratio: 2 / 3;
+
       background-color: var(--pergamena);
       border-radius: 16px 16px 0 0;
     }
@@ -322,19 +352,21 @@
       transform: translateY(-6px);
     }
 
-    /* Numerazione con fondo pieno */
-
     .numero {
       position: absolute;
       top: 16px;
       left: 16px;
       z-index: 1;
+
       min-width: 54px;
       padding: 8px 10px;
+
       border: 1px solid var(--verde);
       border-radius: 12px;
+
       background-color: var(--carta);
       color: var(--verde);
+
       font-family: "Bricolage Grotesque", Arial, sans-serif;
       font-size: 30px;
       font-weight: 800;
@@ -342,15 +374,18 @@
       text-align: center;
     }
 
-    /* SCHEDA INFORMATIVA */
+    /* INFORMAZIONI DEGLI EVENTI */
 
     .info {
       flex: 1;
       display: flex;
       flex-direction: column;
+
       padding: 23px;
+
       background-color: var(--carta);
       color: var(--carbone);
+
       border: 1px solid var(--bordo);
       border-top: none;
       border-radius: 0 0 16px 16px;
@@ -367,6 +402,7 @@
 
     .info h3 {
       margin: 12px 0 10px;
+
       color: var(--carbone);
       font-family: "Bricolage Grotesque", Arial, sans-serif;
       font-size: 28px;
@@ -381,15 +417,9 @@
       line-height: 1.6;
     }
 
-    /* DATA E TIMBRO, SEPARATI DALL'IMMAGINE */
-
     .dettagli {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
       margin-top: auto;
-      padding-top: 24px;
+      padding-top: 20px;
       padding-bottom: 22px;
     }
 
@@ -414,61 +444,22 @@
       font-weight: 700;
     }
 
-    /* TIMBRO LEGGIBILE */
-
-    .timbro {
-      position: relative;
-      flex-shrink: 0;
-      width: 86px;
-      height: 86px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      border: 2px solid var(--verde);
-      border-radius: 50%;
-      background-color: var(--pergamena);
-      color: var(--verde);
-      transform: rotate(-8deg);
-    }
-
-    .timbro::before {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border: 1px solid var(--verde);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .timbro-simbolo {
-      color: var(--verde);
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .timbro-testo {
-      color: var(--verde);
-      font-size: 9px;
-      font-weight: 700;
-      line-height: 1.35;
-      letter-spacing: 0.8px;
-      text-align: center;
-    }
-
     .scopri {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 15px;
+
       padding: 13px 17px;
       border: 1px solid var(--carbone);
       border-radius: 25px;
+
       background-color: var(--carta);
       color: var(--carbone);
+
       font-size: 13px;
       font-weight: 700;
+
       transition: background-color 0.2s ease;
     }
 
@@ -484,8 +475,10 @@
 
     footer {
       padding: 25px 5%;
+
       background-color: var(--pergamena);
       color: var(--carbone);
+
       border-top: 1px solid var(--bordo);
       text-align: center;
       font-size: 12px;
@@ -507,20 +500,6 @@
         font-size: 42px;
       }
 
-      .hero {
-        min-height: 580px;
-      }
-
-      .hero-testo {
-        width: 47%;
-        padding-right: 4%;
-      }
-
-      .hero h1 {
-        font-size: 46px;
-        letter-spacing: -2px;
-      }
-
       .griglia {
         gap: 24px;
       }
@@ -536,14 +515,21 @@
       .info h3 {
         font-size: 25px;
       }
+    }
 
-      .timbro {
-        width: 76px;
-        height: 76px;
+    @media (min-width: 761px) and (max-width: 1100px) {
+      .hero {
+        min-height: 620px;
       }
 
-      .timbro-testo {
-        font-size: 8px;
+      .hero-testo {
+        width: 48%;
+        padding: 55px 4% 55px 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(40px, 4.5vw, 50px);
+        letter-spacing: -1.8px;
       }
     }
 
@@ -573,31 +559,60 @@
         font-size: 10px;
       }
 
+      /* Immagine e testo nella stessa sezione */
+
       .hero {
-        display: block;
-        min-height: auto;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        min-height: 780px;
+        min-height: clamp(740px, 100svh, 900px);
       }
 
       .hero-immagine {
-        position: relative;
-        width: 100%;
-        height: auto;
-        object-fit: contain;
+        position: absolute;
+        inset: 0;
 
-        -webkit-mask-image: none;
-        mask-image: none;
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: 27% top;
+      }
+
+      .hero::before {
+        background: linear-gradient(
+          to bottom,
+          rgba(243, 235, 217, 0) 28%,
+          rgba(243, 235, 217, 0.12) 40%,
+          rgba(243, 235, 217, 0.90) 59%,
+          #f3ebd9 76%
+        );
       }
 
       .hero-testo {
         width: 100%;
-        padding: 28px 7% 50px;
-        background-color: var(--pergamena);
+        padding: 360px 7% 45px;
+        background: transparent;
+      }
+
+      .hero .etichetta {
+        font-size: 10px;
+        letter-spacing: 1.5px;
       }
 
       .hero h1 {
-        max-width: 540px;
-        font-size: clamp(40px, 8vw, 56px);
-        letter-spacing: -2px;
+        max-width: 520px;
+        margin: 22px 0 28px;
+
+        font-size: clamp(39px, 8vw, 55px);
+        line-height: 1.05;
+        letter-spacing: -1.8px;
+      }
+
+      .hero .bottone {
+        padding: 15px 23px;
+        font-size: 13px;
       }
 
       .eventi {
@@ -620,17 +635,20 @@
         gap: 65px;
       }
 
-      /* Percorso verticale tra le schede */
+      /* Collegamento verticale tra le isole */
 
       .evento:not(:last-child)::after {
         top: auto;
         bottom: -49px;
         left: 50%;
+
         width: 0;
         height: 32px;
+
         border-top: none;
         border-left: 2px dashed var(--azzurro);
         border-radius: 0;
+
         transform: none;
       }
 
@@ -640,15 +658,6 @@
 
       .info h3 {
         font-size: 28px;
-      }
-
-      .timbro {
-        width: 86px;
-        height: 86px;
-      }
-
-      .timbro-testo {
-        font-size: 9px;
       }
     }
 
@@ -662,7 +671,7 @@
 
 <body>
 
-  <!-- TESTATA -->
+  <!-- MENU E LOGO -->
 
   <header class="testata">
 
@@ -689,7 +698,7 @@
 
   <main>
 
-    <!-- ARCIPELAGO PRINCIPALE -->
+    <!-- IMMAGINE PRINCIPALE -->
 
     <section class="hero" aria-labelledby="titolo-home">
 
@@ -769,19 +778,10 @@
               </p>
 
               <div class="dettagli">
-
                 <div class="data">
                   <span>La partenza</span>
                   <strong>14 settembre</strong>
                 </div>
-
-                <div class="timbro" aria-hidden="true">
-                  <span class="timbro-simbolo">✦</span>
-                  <span class="timbro-testo">
-                    CINEMA<br>IN VIAGGIO
-                  </span>
-                </div>
-
               </div>
 
               <span class="scopri">
@@ -822,19 +822,10 @@
               </p>
 
               <div class="dettagli">
-
                 <div class="data">
                   <span>La partenza</span>
                   <strong>15 settembre</strong>
                 </div>
-
-                <div class="timbro" aria-hidden="true">
-                  <span class="timbro-simbolo">✦</span>
-                  <span class="timbro-testo">
-                    CINEMA<br>IN VIAGGIO
-                  </span>
-                </div>
-
               </div>
 
               <span class="scopri">
@@ -875,19 +866,10 @@
               </p>
 
               <div class="dettagli">
-
                 <div class="data">
                   <span>La partenza</span>
                   <strong>16 settembre</strong>
                 </div>
-
-                <div class="timbro" aria-hidden="true">
-                  <span class="timbro-simbolo">✦</span>
-                  <span class="timbro-testo">
-                    CINEMA<br>IN VIAGGIO
-                  </span>
-                </div>
-
               </div>
 
               <span class="scopri">
