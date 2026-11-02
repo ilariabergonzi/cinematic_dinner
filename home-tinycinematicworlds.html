@@ -38,7 +38,6 @@
     }
 
     body {
-      min-width: 320px;
       background-color: var(--pergamena);
       color: var(--carbone);
       font-family: "DM Sans", Arial, sans-serif;
@@ -57,7 +56,7 @@
 
     a:focus-visible {
       outline: 3px solid var(--verde);
-      outline-offset: 6px;
+      outline-offset: 5px;
     }
 
     /* TESTATA */
@@ -67,7 +66,7 @@
       z-index: 2;
       width: 100%;
       min-height: 145px;
-      padding: 32px 5%;
+      padding: 30px 5%;
 
       display: flex;
       justify-content: space-between;
@@ -124,7 +123,7 @@
       line-height: 1.5;
     }
 
-    /* IMMAGINE PRINCIPALE A TUTTA LARGHEZZA */
+    /* HERO A TUTTA LARGHEZZA */
 
     .hero {
       position: relative;
@@ -155,7 +154,7 @@
       object-position: center center;
     }
 
-    /* Sfumatura per accompagnare il testo */
+    /* Sfumatura leggera, senza nascondere le isole */
 
     .hero::before {
       content: "";
@@ -166,10 +165,9 @@
 
       background: linear-gradient(
         to right,
-        rgba(243, 235, 217, 0) 35%,
-        rgba(243, 235, 217, 0.35) 50%,
-        rgba(243, 235, 217, 0.94) 65%,
-        #f3ebd9 100%
+        rgba(243, 235, 217, 0) 48%,
+        rgba(243, 235, 217, 0.15) 62%,
+        rgba(243, 235, 217, 0.3) 100%
       );
     }
 
@@ -178,7 +176,7 @@
       z-index: 1;
 
       width: 46%;
-      padding: 70px 5% 70px 25px;
+      padding: 65px 5% 65px 25px;
 
       color: var(--carbone);
     }
@@ -314,7 +312,7 @@
       color: var(--carbone);
     }
 
-    /* Percorso tra le destinazioni */
+    /* Percorso che collega le tre destinazioni */
 
     .evento:not(:last-child)::after {
       content: "";
@@ -542,7 +540,7 @@
       }
 
       .logo {
-        font-size: clamp(32px, 8vw, 42px);
+        font-size: clamp(30px, 8vw, 42px);
       }
 
       .sottotitolo {
@@ -559,7 +557,7 @@
         font-size: 10px;
       }
 
-      /* Immagine e testo nella stessa sezione */
+      /* L'isola principale rimane nella parte alta */
 
       .hero {
         align-items: flex-end;
@@ -580,13 +578,15 @@
         object-position: 27% top;
       }
 
+      /* Sfumatura sotto l'illustrazione */
+
       .hero::before {
         background: linear-gradient(
           to bottom,
-          rgba(243, 235, 217, 0) 28%,
-          rgba(243, 235, 217, 0.12) 40%,
-          rgba(243, 235, 217, 0.90) 59%,
-          #f3ebd9 76%
+          rgba(243, 235, 217, 0) 38%,
+          rgba(243, 235, 217, 0.15) 48%,
+          rgba(243, 235, 217, 0.94) 65%,
+          #f3ebd9 82%
         );
       }
 
@@ -605,7 +605,7 @@
         max-width: 520px;
         margin: 22px 0 28px;
 
-        font-size: clamp(39px, 8vw, 55px);
+        font-size: clamp(36px, 8vw, 55px);
         line-height: 1.05;
         letter-spacing: -1.8px;
       }
@@ -635,7 +635,7 @@
         gap: 65px;
       }
 
-      /* Collegamento verticale tra le isole */
+      /* Percorso verticale tra le schede */
 
       .evento:not(:last-child)::after {
         top: auto;
