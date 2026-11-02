@@ -102,6 +102,25 @@
       color: #ffffff;
     }
 
+    .home-pulsanti {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    @media (max-width: 750px) {
+      .home-pulsanti {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .home-pulsanti .home-bottone {
+        width: 100%;
+        max-width: 340px;
+      }
+    }
+
     /* VERSIONE TELEFONO */
 
     @media (max-width: 750px) {
@@ -146,18 +165,22 @@
 
   <main class="home">
     <div class="home-content">
-
       <h1>Cinematic Dinner</h1>
-
       <p class="home-frase">
         Rivivi le storie che ami.<br>
         Questa volta, a tavola.
       </p>
-
-      <a class="home-bottone" href="eventi.html">
-        Scopri tutti i nostri eventi
+    <div class="home-pulsanti">
+      <a class="home-bottone" href="home-retrocinemaclub.html">
+      Retro Cinema Club
       </a>
-
+      <a class="home-bottone" href="home-tinycinematicworlds.html">
+      Tiny Cinematic Worlds
+      </a>
+      <a class="home-bottone" href="home-analogdreamcollege.html">
+      Analog Dream Collage
+      </a>
+    </div>
     </div>
   </main>
 
