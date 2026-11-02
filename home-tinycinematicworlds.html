@@ -1,1 +1,705 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Quarta Parete — Tiny Cinematic Worlds</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* COLORI DEL CONCEPT */
+
+    :root {
+      --pergamena: #f3ebd9;
+      --carbone: #30352f;
+      --verde: #74866a;
+      --argilla: #c68f68;
+      --azzurro: #809eac;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--pergamena);
+      color: var(--carbone);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--carbone);
+      outline-offset: 5px;
+    }
+
+    /* TESTATA */
+
+    .testata {
+      min-height: 150px;
+      padding: 30px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 35px;
+      border-bottom: 1px solid #30352f30;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .menu a {
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .marchio {
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .logo {
+      display: block;
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+    }
+
+    .sottotitolo {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    /* ARCIPELAGO PRINCIPALE */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: clamp(600px, 76vh, 850px);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-immagine {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: left center;
+      mask-image: linear-gradient(
+        90deg,
+        #000 55%,
+        transparent 80%
+      );
+    }
+
+    .hero-testo {
+      width: 46%;
+      padding: 60px 5% 70px 15px;
+    }
+
+    .etichetta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .etichetta::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--verde);
+      box-shadow: 0 0 0 4px #74866a20;
+    }
+
+    h1 {
+      margin: 24px 0 32px;
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: clamp(42px, 4.3vw, 66px);
+      font-weight: 800;
+      line-height: 1.03;
+      letter-spacing: -3px;
+    }
+
+    .bottone {
+      display: inline-flex;
+      align-items: center;
+      gap: 30px;
+      padding: 17px 25px;
+      border: 1px solid var(--carbone);
+      border-radius: 30px;
+      background: var(--argilla);
+      color: var(--carbone);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 3px 4px 0 var(--carbone);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .bottone:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 2px 0 var(--carbone);
+    }
+
+    /* ATLANTE DELLE SERATE */
+
+    .eventi {
+      max-width: 1400px;
+      margin: auto;
+      padding: 58px 5% 75px;
+      border-top: 1px solid #30352f30;
+    }
+
+    .titolo-sezione {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.8px;
+    }
+
+    .titolo-sezione p {
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .legenda {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .legenda::before {
+      content: "";
+      width: 35px;
+      border-top: 2px dashed var(--azzurro);
+    }
+
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 34px;
+    }
+
+    .evento {
+      position: relative;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    /* PERCORSI CHE COLLEGANO LE ISOLE */
+
+    .evento:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 38%;
+      left: calc(100% - 5px);
+      width: 44px;
+      height: 32px;
+      border-top: 2px dashed var(--azzurro);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+      pointer-events: none;
+    }
+
+    /* IMMAGINI DELLE ISOLE */
+
+    .isola {
+      position: relative;
+      aspect-ratio: 2 / 3;
+    }
+
+    .isola img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.35s ease;
+    }
+
+    .evento:hover .isola img {
+      transform: translateY(-8px);
+    }
+
+    .numero {
+      position: absolute;
+      top: 18px;
+      left: 12px;
+      z-index: 1;
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: 45px;
+      font-weight: 800;
+      line-height: 1;
+      color: #53634c;
+    }
+
+    .timbro {
+      position: absolute;
+      right: 12px;
+      bottom: 17px;
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--verde);
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      font-size: 9px;
+      line-height: 1.5;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transform: rotate(-12deg);
+    }
+
+    /* INFORMAZIONI DEGLI EVENTI */
+
+    .info {
+      padding: 22px 8px 0;
+      border-top: 1px solid #30352f40;
+    }
+
+    .destinazione {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #53634c;
+    }
+
+    h3 {
+      margin: 11px 0 9px;
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: 27px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+    }
+
+    .info p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .data {
+      display: inline-block;
+      margin-top: 12px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .scopri {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 21px;
+      padding: 13px 16px;
+      border: 1px solid var(--carbone);
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .evento:hover .scopri {
+      background: var(--argilla);
+    }
+
+    .nota {
+      margin-top: 35px;
+      font-size: 11px;
+    }
+
+    footer {
+      padding: 25px 5%;
+      border-top: 1px solid #30352f30;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1100px) {
+      .testata {
+        flex-wrap: wrap;
+      }
+
+      .menu {
+        gap: 17px;
+      }
+
+      .menu a {
+        font-size: 11px;
+      }
+
+      .logo {
+        font-size: 36px;
+      }
+
+      .hero-testo {
+        width: 45%;
+      }
+
+      h1 {
+        font-size: 51px;
+      }
+    }
+
+    /* TELEFONO */
+
+    @media (max-width: 760px) {
+      .testata {
+        flex-direction: column-reverse;
+        padding: 27px 5%;
+        gap: 25px;
+      }
+
+      .menu {
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .menu a {
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 38px;
+      }
+
+      .sottotitolo {
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: auto;
+        display: block;
+      }
+
+      .hero-immagine {
+        position: relative;
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        object-position: left center;
+        mask-image: none;
+      }
+
+      .hero-testo {
+        width: 100%;
+        padding: 15px 7% 50px;
+      }
+
+      h1 {
+        font-size: clamp(43px, 8vw, 60px);
+        letter-spacing: -2px;
+      }
+
+      .eventi {
+        padding: 42px 7% 55px;
+      }
+
+      .titolo-sezione {
+        display: block;
+      }
+
+      .legenda {
+        margin-top: 20px;
+      }
+
+      .griglia {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+        margin: auto;
+        gap: 65px;
+      }
+
+      /* Il percorso prosegue in verticale */
+
+      .evento:not(:last-child)::after {
+        top: auto;
+        bottom: -49px;
+        left: 50%;
+        width: 0;
+        height: 32px;
+        border-top: 0;
+        border-left: 2px dashed var(--azzurro);
+        border-radius: 0;
+        transform: none;
+      }
+
+      .numero {
+        font-size: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU A SINISTRA, LOGO A DESTRA -->
+
+  <header class="testata">
+
+    <nav class="menu" aria-label="Menu principale">
+      <a href="progetto.html">Il progetto</a>
+      <a href="collabora.html">Collabora con noi</a>
+      <a href="eventi.html">Eventi</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+
+    <a
+      class="marchio"
+      href="index.html"
+      aria-label="Quarta Parete, home"
+    >
+      <span class="logo">Quarta Parete</span>
+
+      <span class="sottotitolo">
+        Il cinema esce dallo schermo e si mette a tavola
+      </span>
+    </a>
+
+  </header>
+
+  <main>
+
+    <!-- ARCIPELAGO PRINCIPALE -->
+
+    <section class="hero" aria-labelledby="titolo-home">
+
+      <img
+        class="hero-immagine"
+        src="images/hero-tiny.jpg"
+        alt="Un arcipelago di piccoli mondi cinematografici collegati da ponti, con tavoli e schermi all’aperto"
+        fetchpriority="high"
+      >
+
+      <div class="hero-testo">
+
+        <span class="etichetta">Atlante delle serate</span>
+
+        <h1 id="titolo-home">
+          Dallo schermo<br>
+          al piatto,<br>
+          oltre ogni confine
+        </h1>
+
+        <a class="bottone" href="progetto.html">
+          Scopri il format
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- PROSSIMI EVENTI -->
+
+    <section class="eventi" aria-labelledby="titolo-eventi">
+
+      <div class="titolo-sezione">
+
+        <div>
+          <h2 id="titolo-eventi">Prossimi eventi</h2>
+          <p>Tre film. Tre isole. Un viaggio da condividere.</p>
+        </div>
+
+        <span class="legenda">
+          Segui il percorso, scegli la tua storia
+        </span>
+
+      </div>
+
+      <div class="griglia">
+
+        <!-- ISOLA DI BARBIE -->
+
+        <a class="evento" href="evento-barbie.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">01</span>
+
+            <img
+              src="images/barbie-tiny.jpg"
+              alt="Isola di Barbie con villa rosa, palme, piscina e una cena davanti allo schermo"
+              loading="lazy"
+            >
+
+            <span class="timbro" aria-hidden="true">
+              CINEMA<br>
+              IN VIAGGIO
+            </span>
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 01 · Soncino
+            </span>
+
+            <h3>Barbie</h3>
+
+            <p>Ristorante Blabla · Soncino</p>
+
+            <span class="data">14 settembre</span>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+        <!-- ISOLA DI INTERSTELLAR -->
+
+        <a class="evento" href="evento-interstellar.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">02</span>
+
+            <img
+              src="images/interstellar-tiny.jpg"
+              alt="Isola di Interstellar con osservatorio, pianeti e tavoli illuminati davanti a uno schermo"
+              loading="lazy"
+            >
+
+            <span class="timbro" aria-hidden="true">
+              CINEMA<br>
+              IN VIAGGIO
+            </span>
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 02 · Lonato del Garda
+            </span>
+
+            <h3>Interstellar</h3>
+
+            <p>Ristorante Pippo · Lonato del Garda</p>
+
+            <span class="data">15 settembre</span>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+        <!-- ISOLA DELLE FOLLIE DELL'IMPERATORE -->
+
+        <a class="evento" href="evento-follie-imperatore.html">
+
+          <div class="isola">
+
+            <span class="numero" aria-hidden="true">03</span>
+
+            <img
+              src="images/follie-tiny.jpg"
+              alt="Isola delle Follie dell’imperatore con palazzo inca, vegetazione e un lama vicino alla tavola"
+              loading="lazy"
+            >
+
+            <span class="timbro" aria-hidden="true">
+              CINEMA<br>
+              IN VIAGGIO
+            </span>
+
+          </div>
+
+          <div class="info">
+
+            <span class="destinazione">
+              Destinazione 03 · Brescia
+            </span>
+
+            <h3>Le follie dell’imperatore</h3>
+
+            <p>Ristorante Cucu · Brescia</p>
+
+            <span class="data">16 settembre</span>
+
+            <span class="scopri">
+              Esplora la serata
+              <span aria-hidden="true">↗</span>
+            </span>
+
+          </div>
+
+        </a>
+
+      </div>
+
+      <p class="nota">Eventi di esempio.</p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Quarta Parete · Dallo schermo al piatto, oltre ogni confine
+  </footer>
+
+</body>
+</html>
