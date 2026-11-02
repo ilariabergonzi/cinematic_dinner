@@ -1,1 +1,713 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Quarta Parete — Retro Cinema Club</title>
+
+  <style>
+    /* COLORI E IMPOSTAZIONI GENERALI */
+
+    :root {
+      --crema: #f2dfbc;
+      --petrolio: #213c3b;
+      --mattone: #b74836;
+      --senape: #d5a348;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--crema);
+      color: var(--petrolio);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--senape);
+      outline-offset: 6px;
+    }
+
+    /* TESTATA */
+
+    .testata {
+      min-height: 150px;
+      padding: 28px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      border-bottom: 1px solid rgba(33, 60, 59, 0.25);
+    }
+
+    /* MENU A SINISTRA */
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--mattone);
+    }
+
+    /* LOGO E SOTTOTITOLO A DESTRA */
+
+    .marchio {
+      flex-shrink: 0;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .logo {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 3.8vw, 58px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -2.7px;
+      text-transform: uppercase;
+    }
+
+    .sottotitolo {
+      display: block;
+      margin-top: 11px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    /* IMMAGINE PRINCIPALE A TUTTA LARGHEZZA */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: clamp(570px, 76vh, 850px);
+      background-color: var(--petrolio);
+      color: var(--crema);
+    }
+
+    .hero-immagine {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Sfumatura per rendere leggibile il testo */
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(
+        90deg,
+        transparent 20%,
+        rgba(13, 37, 37, 0.3) 48%,
+        rgba(13, 37, 37, 0.85) 100%
+      );
+    }
+
+    .hero-testo {
+      width: 46%;
+      padding: 65px 6% 70px 25px;
+    }
+
+    .hero h1 {
+      margin-bottom: 34px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(43px, 4.8vw, 76px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -2.3px;
+      text-shadow: 0 2px 20px rgba(7, 27, 27, 0.35);
+    }
+
+    .bottone {
+      display: inline-flex;
+      align-items: center;
+      gap: 32px;
+      padding: 16px 27px;
+      border: 1px solid rgba(242, 223, 188, 0.7);
+      border-radius: 30px;
+      background-color: var(--mattone);
+      color: var(--crema);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .bottone:hover {
+      background-color: #963928;
+      transform: translateY(-2px);
+    }
+
+    /* PROSSIMI EVENTI */
+
+    .eventi {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 65px 5% 80px;
+    }
+
+    .titolo-sezione {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 34px;
+    }
+
+    .titolo-sezione h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(29px, 3.3vw, 45px);
+      letter-spacing: -1.4px;
+      text-transform: uppercase;
+    }
+
+    .titolo-sezione::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: rgba(33, 60, 59, 0.45);
+    }
+
+    .eventi-griglia {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .evento {
+      display: block;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    /* LOCANDINE */
+
+    .locandina {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      aspect-ratio: 2 / 3;
+      padding: 22px;
+      overflow: hidden;
+      border: 8px solid var(--crema);
+      outline: 1px solid rgba(33, 60, 59, 0.4);
+      background-color: var(--petrolio);
+      color: var(--crema);
+      text-align: center;
+      box-shadow: 4px 7px 0 rgba(33, 60, 59, 0.07);
+      transition: transform 0.25s ease;
+    }
+
+    .locandina img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .locandina::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        rgba(16, 41, 43, 0.8),
+        transparent 42%,
+        transparent 65%,
+        rgba(16, 41, 43, 0.9)
+      );
+    }
+
+    .locandina::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(242, 223, 188, 0.5);
+      pointer-events: none;
+    }
+
+    .evento:hover .locandina {
+      transform: translateY(-5px);
+    }
+
+    .firma {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.7px;
+    }
+
+    .film {
+      display: block;
+      margin-top: 15px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 3.3vw, 48px);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(16, 41, 43, 0.4);
+    }
+
+    .film-lungo {
+      font-size: clamp(27px, 2.8vw, 40px);
+    }
+
+    .numero {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .data {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    /* INFORMAZIONI SOTTO LE LOCANDINE */
+
+    .evento-info {
+      padding-top: 20px;
+    }
+
+    .evento-info h3 {
+      margin-bottom: 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+    }
+
+    .evento-info p {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .scopri {
+      display: inline-block;
+      margin-top: 13px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nota {
+      margin-top: 35px;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 22px 5%;
+      border-top: 1px solid rgba(33, 60, 59, 0.25);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1100px) {
+      .testata {
+        gap: 25px;
+        padding: 28px 4%;
+      }
+
+      .menu {
+        gap: 15px;
+      }
+
+      .menu a {
+        font-size: 10px;
+      }
+
+      .logo {
+        font-size: 42px;
+      }
+
+      .sottotitolo {
+        font-size: 12px;
+      }
+
+      .hero-testo {
+        width: 49%;
+      }
+
+      .eventi-griglia {
+        gap: 23px;
+      }
+
+      .locandina {
+        padding: 20px 12px;
+      }
+
+      .firma {
+        font-size: 17px;
+      }
+    }
+
+    /* TELEFONO */
+
+    @media (max-width: 760px) {
+      .testata {
+        flex-direction: column-reverse;
+        gap: 26px;
+        padding: 26px 5% 22px;
+      }
+
+      .marchio {
+        width: 100%;
+      }
+
+      .logo {
+        font-size: 45px;
+      }
+
+      .sottotitolo {
+        font-size: 13px;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: center;
+        gap: 17px;
+      }
+
+      .menu a {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .hero {
+        min-height: 720px;
+        align-items: flex-end;
+      }
+
+      .hero-immagine {
+        object-position: 32% center;
+      }
+
+      .hero::before {
+        background: linear-gradient(
+          0deg,
+          rgba(13, 37, 37, 0.95) 0%,
+          rgba(13, 37, 37, 0.65) 40%,
+          transparent 75%
+        );
+      }
+
+      .hero-testo {
+        width: 100%;
+        padding: 260px 7% 50px;
+      }
+
+      .hero h1 {
+        max-width: 540px;
+        font-size: 51px;
+        letter-spacing: -1.7px;
+      }
+
+      .eventi {
+        padding: 45px 7% 55px;
+      }
+
+      .eventi-griglia {
+        grid-template-columns: 1fr;
+        max-width: 430px;
+        margin: 0 auto;
+        gap: 38px;
+      }
+
+      .titolo-sezione {
+        gap: 16px;
+      }
+
+      .locandina {
+        padding: 25px;
+      }
+
+      .firma {
+        font-size: 23px;
+      }
+
+      .film {
+        font-size: 48px;
+      }
+
+      .film-lungo {
+        font-size: 40px;
+      }
+
+      .nota {
+        max-width: 430px;
+        margin: 30px auto 0;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .menu {
+        gap: 13px;
+      }
+
+      .menu a {
+        font-size: 9px;
+      }
+
+      .logo {
+        font-size: 40px;
+      }
+
+      .sottotitolo {
+        font-size: 12px;
+      }
+
+      .hero h1 {
+        font-size: 44px;
+      }
+
+      .film {
+        font-size: 40px;
+      }
+
+      .film-lungo {
+        font-size: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU A SINISTRA E LOGO A DESTRA -->
+
+  <header class="testata">
+
+    <nav class="menu" aria-label="Menu principale">
+      <a href="progetto.html">Il progetto</a>
+      <a href="collabora.html">Collabora con noi</a>
+      <a href="eventi.html">Eventi</a>
+      <a href="contatti.html">Contatti</a>
+    </nav>
+
+    <a class="marchio" href="index.html" aria-label="Quarta Parete, home">
+      <span class="logo">Quarta Parete</span>
+
+      <span class="sottotitolo">
+        Il cinema esce dallo schermo e si mette a tavola
+      </span>
+    </a>
+
+  </header>
+
+  <main>
+
+    <!-- IMMAGINE PRINCIPALE -->
+
+    <section class="hero" aria-labelledby="titolo-home">
+
+      <img
+        class="hero-immagine"
+        src="images/hero-retro.jpg"
+        alt="Una tavola apparecchiata in un mondo cinematografico rétro"
+        fetchpriority="high"
+      >
+
+      <div class="hero-testo">
+
+        <h1 id="titolo-home">
+          Dallo schermo<br>
+          al piatto,<br>
+          oltre ogni confine
+        </h1>
+
+        <a class="bottone" href="progetto.html">
+          Scopri il format
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- PROSSIMI EVENTI -->
+
+    <section class="eventi" aria-labelledby="titolo-eventi">
+
+      <div class="titolo-sezione">
+        <h2 id="titolo-eventi">Prossimi eventi</h2>
+      </div>
+
+      <div class="eventi-griglia">
+
+        <!-- BARBIE -->
+
+        <a class="evento" href="evento-barbie.html">
+
+          <div class="locandina">
+
+            <img
+              src="images/barbie-retro.jpg"
+              alt="Illustrazione rétro per la serata Barbie"
+              loading="lazy"
+            >
+
+            <div>
+              <span class="firma">Quarta Parete</span>
+              <span class="film">Barbie</span>
+            </div>
+
+            <div>
+              <span class="numero">Appuntamento n° 01</span>
+              <span class="data">14 settembre</span>
+            </div>
+
+          </div>
+
+          <div class="evento-info">
+            <h3>Barbie</h3>
+            <p>Ristorante Blabla · Soncino</p>
+            <span class="scopri">Scopri la serata ↗</span>
+          </div>
+
+        </a>
+
+        <!-- INTERSTELLAR -->
+
+        <a class="evento" href="evento-interstellar.html">
+
+          <div class="locandina">
+
+            <img
+              src="images/interstellar-retro.jpg"
+              alt="Illustrazione rétro per la serata Interstellar"
+              loading="lazy"
+            >
+
+            <div>
+              <span class="firma">Quarta Parete</span>
+              <span class="film">Interstellar</span>
+            </div>
+
+            <div>
+              <span class="numero">Appuntamento n° 02</span>
+              <span class="data">15 settembre</span>
+            </div>
+
+          </div>
+
+          <div class="evento-info">
+            <h3>Interstellar</h3>
+            <p>Ristorante Pippo · Lonato del Garda</p>
+            <span class="scopri">Scopri la serata ↗</span>
+          </div>
+
+        </a>
+
+        <!-- LE FOLLIE DELL'IMPERATORE -->
+
+        <a class="evento" href="evento-follie-imperatore.html">
+
+          <div class="locandina">
+
+            <img
+              src="images/follie-retro.jpg"
+              alt="Illustrazione rétro per la serata Le follie dell’imperatore"
+              loading="lazy"
+            >
+
+            <div>
+              <span class="firma">Quarta Parete</span>
+
+              <span class="film film-lungo">
+                Le follie<br>
+                dell’imperatore
+              </span>
+            </div>
+
+            <div>
+              <span class="numero">Appuntamento n° 03</span>
+              <span class="data">16 settembre</span>
+            </div>
+
+          </div>
+
+          <div class="evento-info">
+            <h3>Le follie dell’imperatore</h3>
+            <p>Ristorante Cucu · Brescia</p>
+            <span class="scopri">Scopri la serata ↗</span>
+          </div>
+
+        </a>
+
+      </div>
+
+      <p class="nota">
+        Eventi di esempio.
+      </p>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Quarta Parete · Dallo schermo al piatto, oltre ogni confine
+  </footer>
+
+</body>
+</html>
