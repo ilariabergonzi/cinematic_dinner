@@ -1,188 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Quarta Parete è un cinema gastronomico itinerante. Ogni proiezione incontra un menù di quattro portate ispirato al film.">
+  <title>Quarta Parete — Cinema gastronomico itinerante</title>
 
-  <title>Cinematic Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --paper: #f3ebd9;
+      --ink: #30352f;
+      --red: #962f2a;
+      --green: #e5e7d7;
+      --rule: #c9bfab;
+      --display: "Bricolage Grotesque", Georgia, serif;
     }
 
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      background-color: #0d0d0d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 1rem/1.6 "DM Sans", system-ui, sans-serif;
     }
 
-    /* MENU */
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-underline-offset: .2em; }
+    :focus-visible { outline: 3px solid var(--red); outline-offset: 5px; }
+    h1, h2, h3 { margin: 0; font-family: var(--display); line-height: 1; }
+    p { margin: 0; }
 
-    .menu {
-      width: 100%;
-      padding: 28px 5%;
-      border-bottom: 1px solid #2c2c2c;
+    .wrap { width: min(100% - 3rem, 74rem); margin-inline: auto; }
+    .skip {
+      position: absolute;
+      z-index: 2;
+      padding: .5rem 1rem;
+      background: var(--paper);
+      transform: translateY(-150%);
     }
 
-    .menu ul {
+    .skip:focus { transform: translateY(0); }
+    .header { border-bottom: 1px solid var(--rule); }
+    .header-inner {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 42px;
-      list-style: none;
+      gap: 1.4rem;
+      min-height: 5rem;
     }
 
-    .menu a {
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: opacity 0.3s ease;
-    }
-
-    .menu a:hover {
-      opacity: 0.6;
-    }
-
-    /* CONTENUTO HOME */
-
-    .home {
-      min-height: calc(100vh - 75px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 70px 5%;
-      text-align: center;
-    }
-
-    .home-content {
-      max-width: 1000px;
-    }
-
-    .home h1 {
-      font-size: clamp(55px, 10vw, 130px);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: -5px;
-      text-transform: uppercase;
-    }
-
-    .home-frase {
-      max-width: 750px;
-      margin: 35px auto 45px;
-      color: #d0d0d0;
-      font-size: clamp(20px, 3vw, 32px);
-      line-height: 1.35;
-    }
-
-    .home-bottone {
+    .brand {
       display: inline-block;
-      padding: 18px 30px;
-      border: 1px solid #ffffff;
-      background-color: #ffffff;
-      color: #0d0d0d;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      border: 2px solid currentColor;
+      padding: .48rem .65rem;
+      color: var(--ink);
+      font: 700 1rem/1 var(--display);
+      letter-spacing: -.04em;
       text-decoration: none;
-      text-transform: uppercase;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
     }
 
-    .home-bottone:hover {
-      background-color: transparent;
-      color: #ffffff;
-    }
-
-    .home-pulsanti {
+    .nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 18px;
+      gap: .5rem clamp(.9rem, 3vw, 2.4rem);
+      padding: 0;
+      margin: 0;
+      list-style: none;
     }
 
-    @media (max-width: 750px) {
-      .home-pulsanti {
-        flex-direction: column;
-        align-items: center;
-      }
-    
-      .home-pulsanti .home-bottone {
-        width: 100%;
-        max-width: 340px;
-      }
+    .nav a {
+      display: inline-block;
+      padding: .35rem 0;
+      font-weight: 700;
+      text-decoration: none;
     }
 
-    /* VERSIONE TELEFONO */
+    .nav a:hover { color: var(--red); text-decoration: underline; }
 
-    @media (max-width: 750px) {
-      .menu {
-        padding: 22px 20px;
-        overflow-x: auto;
-      }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: 1rem;
+      padding-block: clamp(2.75rem, 7vw, 6.5rem);
+    }
 
-      .menu ul {
-        width: max-content;
-        justify-content: flex-start;
-        gap: 25px;
-      }
+    h1 {
+      color: var(--red);
+      font-size: clamp(2rem, 5.25vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -.075em;
+    }
 
-      .menu a {
-        font-size: 12px;
-        white-space: nowrap;
-      }
+    .tagline {
+      max-width: 21ch;
+      margin-block: 1.2rem 1.8rem;
+      font: 700 clamp(1.45rem, 3vw, 2.55rem)/1.1 var(--display);
+      letter-spacing: -.035em;
+    }
 
-      .home h1 {
-        letter-spacing: -3px;
-      }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      min-height: 3rem;
+      padding: .65rem 1.15rem;
+      border-radius: .3rem;
+      background: var(--red);
+      color: var(--paper);
+      font-weight: 700;
+      text-decoration: none;
+    }
 
-      .home-frase {
-        margin-top: 28px;
-      }
+    .button:hover { background: #73221e; }
+    .hero img { width: 100%; }
+
+    .section { padding-block: clamp(3rem, 7vw, 6rem); }
+    .intro { background: var(--green); }
+    .intro .wrap { max-width: 46rem; text-align: center; }
+    h2 { font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.05em; }
+    .intro p { margin-top: 1.1rem; font-size: clamp(1rem, 2vw, 1.2rem); }
+
+    .events h2 { text-align: center; }
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 3vw, 2.25rem);
+      margin-top: 2.25rem;
+    }
+
+    .event { text-align: center; }
+    .event img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; }
+    .event h3 { font-size: clamp(1.35rem, 2.5vw, 2rem); margin-top: 1rem; }
+    .event p { margin-top: .4rem; }
+
+    .footer { border-top: 1px solid var(--rule); padding-block: 2.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer h2 { font-size: 1.6rem; letter-spacing: -.025em; }
+    .footer p { margin-top: .5rem; }
+
+    @media (max-width: 760px) {
+      .header-inner { flex-direction: column; gap: .5rem; padding-block: 1rem; }
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 1.5rem; }
+      .tagline { margin-inline: auto; }
+      .hero img { max-width: 35rem; margin-inline: auto; }
+      .event-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .event { width: min(100%, 26rem); margin-inline: auto; }
+    }
+
+    @media (max-width: 460px) {
+      .wrap { width: calc(100% - 2rem); }
+      .nav a { font-size: .85rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
-
 <body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
 
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="progetto.html">Il progetto</a></li>
-      <li><a href="collabora.html">Collabora con noi</a></li>
-      <li><a href="eventi.html">Eventi</a></li>
-      <li><a href="contatti.html">Contatti</a></li>
-    </ul>
-  </nav>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./index.html" aria-label="Quarta Parete, home">QUARTAPARETE</a>
 
-  <main class="home">
-    <div class="home-content">
-      <h1>Cinematic Dinner</h1>
-      <p class="home-frase">
-        Rivivi le storie che ami.<br>
-        Questa volta, a tavola.
-      </p>
-    <div class="home-pulsanti">
-      <a class="home-bottone" href="home-retrocinemaclub.html">
-      Retro Cinema Club
-      </a>
-      <a class="home-bottone" href="home-tinycinematicworlds.html">
-      Tiny Cinematic Worlds
-      </a>
-      <a class="home-bottone" href="home-analogdreamcollege.html">
-      Analog Dream Collage
-      </a>
+      <nav aria-label="Menu principale">
+        <ul class="nav">
+          <li><a href="#progetto">Il progetto</a></li>
+          <li><a href="#collabora">Collabora con noi</a></li>
+          <li><a href="#eventi">Eventi</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </nav>
     </div>
-    </div>
+  </header>
+
+  <main id="contenuto">
+    <section class="wrap hero" aria-labelledby="titolo">
+      <div>
+        <h1 id="titolo">QUARTAPARETE</h1>
+        <p class="tagline">Il cinema esce dallo schermo e si mette a tavola</p>
+        <a class="button" href="#eventi">
+          Scopri gli eventi <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <img
+        src="isola_base.png"
+        alt="Terrazza sospesa con uno schermo all’aperto e tre tavoli apparecchiati"
+        width="1536"
+        height="1024"
+        fetchpriority="high"
+      >
+    </section>
+
+    <section class="section intro" id="progetto" aria-labelledby="titolo-progetto">
+      <div class="wrap">
+        <h2 id="titolo-progetto">Il progetto</h2>
+        <p>Quarta Parete è un cinema gastronomico itinerante. Ogni serata, in un luogo diverso, abbiniamo un film a un menù di quattro portate ispirato ai colori, alle atmosfere e ai dettagli della storia sullo schermo. Puoi consultare il menù nella scheda dell’evento prima di prenotare.</p>
+      </div>
+    </section>
+
+    <section class="section events wrap" id="eventi" aria-labelledby="titolo-eventi">
+      <h2 id="titolo-eventi">Eventi in programma</h2>
+
+      <div class="event-grid">
+        <!-- Aggiorna data e luogo quando ciascuna serata è confermata. -->
+        <article class="event">
+          <img
+            src="barbie_isola.png"
+            alt="Isola rosa con piscina e palma"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          >
+          <h3>Barbie</h3>
+          <p>Data e luogo da annunciare</p>
+        </article>
+
+        <article class="event">
+          <img
+            src="follie_isola.png"
+            alt="Isola con gradoni di pietra e un lama"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          >
+          <h3>Le follie dell’imperatore</h3>
+          <p>Data e luogo da annunciare</p>
+        </article>
+
+        <article class="event">
+          <img
+            src="interstellar_isola.png"
+            alt="Isola con un campo di mais e un buco nero sullo schermo"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          >
+          <h3>Interstellar</h3>
+          <p>Data e luogo da annunciare</p>
+        </article>
+      </div>
+    </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <section id="collabora" aria-labelledby="titolo-collabora">
+        <h2 id="titolo-collabora">Collabora con noi</h2>
+        <p>Hai un ristorante o uno spazio in cui ospitare una proiezione con cena? <a href="#contatti">Proponici il tuo spazio</a>.</p>
+      </section>
+
+      <section id="contatti" aria-labelledby="titolo-contatti">
+        <h2 id="titolo-contatti">Contatti</h2>
+        <!-- Inserisci qui l’indirizzo email ufficiale o il profilo social. -->
+        <p>Quarta Parete, in collaborazione con Ubifilm.</p>
+      </section>
+    </div>
+  </footer>
 </body>
 </html>
