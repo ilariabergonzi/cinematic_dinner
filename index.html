@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
   <meta name="description" content="Quarta Parete è un cinema gastronomico itinerante. Ogni proiezione incontra un menù di quattro portate ispirato al film.">
   <title>Quarta Parete — Cinema gastronomico itinerante</title>
 
@@ -12,6 +13,7 @@
 
   <style>
     :root {
+      color-scheme: only light;
       --paper: #f3ebd9;
       --ink: #30352f;
       --red: #962f2a;
@@ -21,7 +23,9 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       background: var(--paper);
@@ -35,7 +39,11 @@
     h1, h2, h3 { margin: 0; font-family: var(--display); line-height: 1; }
     p { margin: 0; }
 
-    .wrap { width: min(100% - 3rem, 74rem); margin-inline: auto; }
+    .wrap {
+      width: min(100% - 3rem, 74rem);
+      margin-inline: auto;
+    }
+
     .skip {
       position: absolute;
       z-index: 2;
@@ -45,7 +53,9 @@
     }
 
     .skip:focus { transform: translateY(0); }
+
     .header { border-bottom: 1px solid var(--rule); }
+
     .header-inner {
       display: flex;
       justify-content: space-between;
@@ -128,6 +138,7 @@
     .intro p { margin-top: 1.1rem; font-size: clamp(1rem, 2vw, 1.2rem); }
 
     .events h2 { text-align: center; }
+
     .event-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -194,7 +205,7 @@
       </div>
 
       <img
-        src="isola_base.png"
+        src="./images/isola_base.png"
         alt="Terrazza sospesa con uno schermo all’aperto e tre tavoli apparecchiati"
         width="1536"
         height="1024"
@@ -216,7 +227,7 @@
         <!-- Aggiorna data e luogo quando ciascuna serata è confermata. -->
         <article class="event">
           <img
-            src="barbie_isola.png"
+            src="./images/barbie_isola.png"
             alt="Isola rosa con piscina e palma"
             width="1536"
             height="1024"
@@ -228,7 +239,7 @@
 
         <article class="event">
           <img
-            src="follie_isola.png"
+            src="./images/follie_isola.png"
             alt="Isola con gradoni di pietra e un lama"
             width="1536"
             height="1024"
@@ -240,7 +251,7 @@
 
         <article class="event">
           <img
-            src="interstellar_isola.png"
+            src="./images/interstellar_isola.png"
             alt="Isola con un campo di mais e un buco nero sullo schermo"
             width="1536"
             height="1024"
