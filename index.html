@@ -81,7 +81,7 @@
       transform: translateY(0);
     }
 
-    /* Menu standard da riutilizzare nelle altre pagine. */
+    /* Menu standard */
     .header {
       border-bottom: 1px solid var(--rule);
     }
@@ -130,7 +130,7 @@
       text-decoration: underline;
     }
 
-    /* Apertura della home. */
+    /* Apertura della home */
     .hero {
       display: grid;
       grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
@@ -188,7 +188,7 @@
       letter-spacing: -.05em;
     }
 
-    /* Vivi l’esperienza. */
+    /* Vivi l’esperienza */
     .intro {
       background: var(--ivory);
       text-align: center;
@@ -207,7 +207,7 @@
       font-size: clamp(1rem, 2vw, 1.2rem);
     }
 
-    /* Eventi e percorso tra le isole. */
+    /* Eventi e percorso tra le isole */
     .events h2,
     .events-action {
       text-align: center;
@@ -257,15 +257,8 @@
       pointer-events: none;
     }
 
-    .event-link img,
-    .event-arrow {
+    .event-link img {
       transition: transform .2s ease;
-    }
-
-    .event-arrow {
-      display: inline-block;
-      margin-left: .2em;
-      color: var(--red);
     }
 
     .event-link:hover img,
@@ -279,16 +272,11 @@
       text-decoration: underline;
     }
 
-    .event-link:hover .event-arrow,
-    .event-link:focus-visible .event-arrow {
-      transform: translateX(.2rem);
-    }
-
     .events-action {
       margin-top: 2.75rem;
     }
 
-    /* Footer standard da riutilizzare nelle altre pagine. */
+    /* Footer standard */
     .footer {
       border-top: 1px solid var(--rule);
       background: var(--ivory);
@@ -297,9 +285,14 @@
 
     .footer-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) 1fr auto auto;
-      align-items: start;
-      gap: 1.75rem clamp(1.25rem, 4vw, 3rem);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-grid > * {
+      min-width: 0;
     }
 
     .footer-name {
@@ -309,12 +302,9 @@
       text-decoration: none;
     }
 
-    .footer-tagline {
-      max-width: 28ch;
-      margin-block: .35rem .6rem;
-    }
-
     .footer-email {
+      display: block;
+      margin-top: .3rem;
       overflow-wrap: anywhere;
     }
 
@@ -336,6 +326,7 @@
 
     .social-links {
       display: flex;
+      justify-content: center;
       gap: .25rem;
     }
 
@@ -355,14 +346,12 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: .25rem .5rem;
     }
 
-    .footer-partner span {
-      white-space: nowrap;
-    }
-
     .footer-partner img {
+      flex: 0 0 auto;
       width: 6rem;
       height: 2.75rem;
       object-fit: contain;
@@ -443,15 +432,12 @@
         scroll-behavior: auto;
       }
 
-      .event-link img,
-      .event-arrow {
+      .event-link img {
         transition: none;
       }
 
       .event-link:hover img,
-      .event-link:focus-visible img,
-      .event-link:hover .event-arrow,
-      .event-link:focus-visible .event-arrow {
+      .event-link:focus-visible img {
         transform: none;
       }
     }
@@ -526,14 +512,11 @@
         <svg class="event-route" viewBox="0 0 100 56" aria-hidden="true" focusable="false">
           <path d="M4 32 C29 3 70 50 96 20" fill="none" stroke="currentColor"
             stroke-width="3" stroke-linecap="round" stroke-dasharray="3 8"
-            vector-effect="non-scaling-stroke">
-          </path>
+            vector-effect="non-scaling-stroke"></path>
         </svg>
 
         <article class="event">
-          <!-- Quando la pagina è pronta, sostituisci questo div con
-               <a class="event-card event-link" href="./NOME-PAGINA.html">
-               e chiudilo con </a>. Puoi copiare la freccia dalla scheda Barbie. -->
+          <!-- Quando la pagina è pronta, usa un link come nella scheda Barbie. -->
           <div class="event-card">
             <img
               src="./images/follie_isola.png"
@@ -550,13 +533,11 @@
         <svg class="event-route" viewBox="0 0 100 56" aria-hidden="true" focusable="false">
           <path d="M4 22 C30 51 72 5 96 33" fill="none" stroke="currentColor"
             stroke-width="3" stroke-linecap="round" stroke-dasharray="3 8"
-            vector-effect="non-scaling-stroke">
-          </path>
+            vector-effect="non-scaling-stroke"></path>
         </svg>
 
         <article class="event">
-          <!-- Quando la pagina è pronta, trasforma anche questo div in un link
-               seguendo la struttura della scheda Barbie. -->
+          <!-- Quando la pagina è pronta, usa un link come nella scheda Barbie. -->
           <div class="event-card">
             <img
               src="./images/interstellar_isola.png"
@@ -583,11 +564,9 @@
     <div class="wrap footer-grid">
       <div>
         <a class="footer-name" href="./index.html">QUARTAPARETE</a>
-        <p>
-          <a class="footer-email" href="mailto:info@quartaparete.events">
+        <a class="footer-email" href="mailto:info@quartaparete.events">
           info@quartaparete.events
-          </a>
-        </p>
+        </a>
       </div>
 
       <nav aria-label="Informazioni sul sito">
@@ -612,6 +591,7 @@
               </svg>
             </a>
           </li>
+
           <li>
             <a class="social-link" aria-label="Facebook">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
@@ -619,6 +599,7 @@
               </svg>
             </a>
           </li>
+
           <li>
             <a class="social-link" aria-label="TikTok">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
