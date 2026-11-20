@@ -1,224 +1,568 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <meta name="description" content="Scopri le serate di QUARTAPARETE. A ogni proiezione, un menù di quattro portate ispirato al film.">
+  <title>Eventi — QUARTAPARETE</title>
 
-  <title>Eventi in programma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <style>
-    * {
+    :root {
+      color-scheme: only light;
+      --paper: #f3ebd9;
+      --ivory: #faf4e8;
+      --ink: #30352f;
+      --red: #962f2a;
+      --red-hover: #73221e;
+      --rule: #c9bfab;
+      --display: "Bricolage Grotesque", Georgia, serif;
+    }
+
+    *, *::before, *::after {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      background-color: #0d0d0d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 1rem/1.6 "DM Sans", system-ui, sans-serif;
     }
 
-    /* MENU */
-
-    .menu {
-      width: 100%;
-      padding: 28px 5%;
-      border-bottom: 1px solid #2c2c2c;
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
     }
-    
-    .menu ul {
+
+    a {
+      color: inherit;
+      text-underline-offset: .2em;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--red);
+      outline-offset: 5px;
+    }
+
+    h1, h2, p {
+      margin: 0;
+    }
+
+    h1, h2 {
+      font-family: var(--display);
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+
+    .wrap {
+      width: min(100% - 3rem, 74rem);
+      margin-inline: auto;
+    }
+
+    .skip {
+      position: absolute;
+      z-index: 2;
+      padding: .5rem 1rem;
+      background: var(--ivory);
+      transform: translateY(-150%);
+    }
+
+    .skip:focus {
+      transform: translateY(0);
+    }
+
+    /* Menu standard */
+    .header {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .header-inner {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 42px;
+      gap: 1.4rem;
+      min-height: 5rem;
+    }
+
+    .brand {
+      display: inline-block;
+      border: 2px solid currentColor;
+      padding: .48rem .65rem;
+      color: var(--ink);
+      font: 700 1rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem clamp(.9rem, 3vw, 2.4rem);
+      margin: 0;
+      padding: 0;
       list-style: none;
     }
-    
-    .menu a {
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: opacity 0.3s ease;
-    }
-    
-    .menu a:hover {
-      opacity: 0.6;
-    }
-    
-        .eventi {
-          width: min(1200px, 90%);
-          margin: 0 auto;
-          padding: 90px 0 110px;
-        }
 
-    .eventi h1 {
-      margin-bottom: 60px;
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .nav a:hover,
+    .nav a[aria-current="page"],
+    .brand:hover {
+      color: var(--red);
+    }
+
+    .nav a:hover,
+    .nav a[aria-current="page"] {
+      text-decoration: underline;
+    }
+
+    /* Apertura della pagina */
+    .page-intro {
+      padding-block: clamp(3rem, 8vw, 6.5rem) clamp(2rem, 5vw, 4rem);
       text-align: center;
-      font-size: clamp(42px, 7vw, 88px);
+    }
+
+    .page-intro h1 {
+      color: var(--red);
+      font-size: clamp(3.25rem, 9vw, 7rem);
       font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -3px;
-      text-transform: uppercase;
     }
 
-    .eventi-grid {
+    .page-tagline {
+      margin-top: .85rem;
+      font: 700 clamp(1.35rem, 3vw, 2rem)/1.2 var(--display);
+      letter-spacing: -.03em;
+    }
+
+    .page-description {
+      max-width: 46ch;
+      margin: .6rem auto 0;
+    }
+
+    /* Il percorso tra le serate */
+    .event-list {
+      max-width: 64rem;
+      padding-bottom: clamp(3.5rem, 8vw, 7rem);
+    }
+
+    .event {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(1.5rem, 5vw, 5rem);
     }
 
-    .evento-card {
+    .event--reverse .event-island {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .event--reverse .event-copy {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+    }
+
+    .event-island {
       display: block;
-      overflow: hidden;
-      background-color: #181818;
-      color: #ffffff;
-      text-decoration: none;
-      border: 1px solid #2c2c2c;
-      transition:
-        transform 0.3s ease,
-        border-color 0.3s ease;
+      border-radius: .5rem;
     }
 
-    .evento-card:hover {
-      transform: translateY(-8px);
-      border-color: #ffffff;
-    }
-
-    .evento-card img {
-      display: block;
+    .event-island img {
       width: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      transition: transform 0.5s ease;
+      aspect-ratio: 3 / 2;
+      object-fit: contain;
     }
 
-    .evento-card:hover img {
-      transform: scale(1.03);
+    a.event-island img {
+      transition: transform .2s ease;
     }
 
-    .evento-info {
-      padding: 25px 22px 28px;
+    a.event-island:hover img,
+    a.event-island:focus-visible img {
+      transform: translateY(-.4rem);
     }
 
-    .evento-info h2 {
-      margin-bottom: 14px;
-      font-size: 25px;
-      line-height: 1.05;
-      text-transform: uppercase;
+    .event-copy {
+      max-width: 25rem;
     }
 
-    .evento-luogo,
-    .evento-data {
-      color: #c8c8c8;
-      font-size: 16px;
-      line-height: 1.5;
+    .event h2 {
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
     }
 
-    .evento-data {
-      margin-top: 8px;
-      color: #ffffff;
+    .event-description {
+      margin-top: .8rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+
+    .event-meta {
+      margin-top: .85rem;
+      color: var(--red);
       font-weight: 700;
     }
-    
-    @media (max-width: 750px) {
-      .menu {
-        padding: 22px 20px;
-        overflow-x: auto;
-      }
-    
-      .menu ul {
-        width: max-content;
-        justify-content: flex-start;
-        gap: 25px;
-      }
-    
-      .menu a {
-        font-size: 12px;
-        white-space: nowrap;
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 3rem;
+      margin-top: 1.15rem;
+      padding: .65rem 1.15rem;
+      border-radius: .3rem;
+      background: var(--red);
+      color: var(--ivory);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: var(--red-hover);
+    }
+
+    .event-route {
+      display: block;
+      width: min(52%, 25rem);
+      height: clamp(3rem, 8vw, 6rem);
+      margin: .3rem auto;
+      color: var(--red);
+      pointer-events: none;
+    }
+
+    .event-route--reverse {
+      transform: scaleX(-1);
+    }
+
+    .route-vertical {
+      display: none;
+    }
+
+    /* Footer standard */
+    .footer {
+      border-top: 1px solid var(--rule);
+      background: var(--ivory);
+      padding-block: 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-grid > * {
+      min-width: 0;
+    }
+
+    .footer-name {
+      display: inline-block;
+      font: 700 1.3rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    .footer-email {
+      display: block;
+      margin-top: .3rem;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-links,
+    .social-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: .35rem;
+    }
+
+    .footer a[href]:hover {
+      color: var(--red);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+    }
+
+    .social-link {
+      display: grid;
+      width: 2.75rem;
+      height: 2.75rem;
+      place-items: center;
+    }
+
+    .social-link svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .footer-partner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: .25rem .5rem;
+    }
+
+    .footer-partner img {
+      flex: 0 0 auto;
+      width: 6rem;
+      height: 2.75rem;
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
-    
-    @media (max-width: 850px) {
-      .eventi {
-        padding-top: 65px;
+
+    @media (max-width: 760px) {
+      .header-inner {
+        display: grid;
+        justify-items: end;
+        gap: .5rem;
+        padding-block: 1rem .5rem;
       }
 
-      .eventi h1 {
-        margin-bottom: 45px;
-        letter-spacing: -2px;
+      .header-inner nav {
+        grid-row: 2;
+        width: 100%;
       }
 
-      .eventi-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
+      .nav {
+        justify-content: center;
       }
 
-      .evento-card {
-        max-width: 520px;
-        margin: 0 auto;
+      .event {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        gap: .75rem;
+        text-align: center;
+      }
+
+      .event--reverse .event-island,
+      .event--reverse .event-copy {
+        grid-column: auto;
+        grid-row: auto;
+        justify-self: center;
+      }
+
+      .event-island {
+        width: min(100%, 28rem);
+      }
+
+      .event-route {
+        width: 3.75rem;
+        height: 4rem;
+        margin-block: .9rem;
+      }
+
+      .route-desktop {
+        display: none;
+      }
+
+      .route-vertical {
+        display: block;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .wrap {
+        width: calc(100% - 2rem);
+      }
+
+      .nav a {
+        font-size: .85rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      a.event-island img {
+        transition: none;
+      }
+
+      a.event-island:hover img,
+      a.event-island:focus-visible img {
+        transform: none;
       }
     }
   </style>
 </head>
 
 <body>
- 
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="progetto.html">Il progetto</a></li>
-      <li><a href="collabora.html">Collabora con noi</a></li>
-      <li><a href="eventi.html">Eventi</a></li>
-      <li><a href="contatti.html">Contatti</a></li>
-    </ul>
-  </nav>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
 
-  <main class="eventi">
+  <header class="header">
+    <div class="wrap header-inner">
+      <nav aria-label="Menu principale">
+        <ul class="nav">
+          <li><a href="./progetto.html">Il progetto</a></li>
+          <li><a href="./collabora.html">Collabora con noi</a></li>
+          <li><a href="./eventi.html" aria-current="page">Eventi</a></li>
+          <li><a href="./contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
 
-    <h1>Eventi in programma</h1>
-
-    <div class="eventi-grid">
-
-      <a class="evento-card" href="evento-barbie.html">
-        <img src="images/barbie.jpeg" alt="Locandina dell'evento Barbie">
-
-        <div class="evento-info">
-          <h2>Barbie</h2>
-          <p class="evento-luogo">Ristorante Blabla · Soncino</p>
-          <p class="evento-data">14 settembre</p>
-        </div>
+      <a class="brand" href="./index.html" aria-label="Quarta Parete, home">
+        QUARTAPARETE
       </a>
-
-      <a class="evento-card" href="evento-interstellar.html">
-        <img src="images/interstellar.jpg" alt="Locandina dell'evento Interstellar">
-
-        <div class="evento-info">
-          <h2>Interstellar</h2>
-          <p class="evento-luogo">Ristorante Pippo · Lonato del Garda</p>
-          <p class="evento-data">15 settembre</p>
-        </div>
-      </a>
-
-      <a class="evento-card" href="evento-follie-imperatore.html">
-        <img
-          src="images/follie-imperatore.jpeg"
-          alt="Locandina dell'evento Le follie dell'imperatore"
-        >
-
-        <div class="evento-info">
-          <h2>Le follie dell’imperatore</h2>
-          <p class="evento-luogo">Ristorante Cucu · Brescia</p>
-          <p class="evento-data">16 settembre</p>
-        </div>
-      </a>
-
     </div>
+  </header>
 
+  <main id="contenuto">
+    <section class="wrap page-intro" aria-labelledby="titolo">
+      <h1 id="titolo">Eventi</h1>
+      <p class="page-tagline">Un film da rivedere. Una cena da scoprire.</p>
+      <p class="page-description">Scegli la storia che vuoi vivere a tavola. Ogni serata abbina una proiezione a un menù di quattro portate ispirato al film.</p>
+    </section>
+
+    <section class="wrap event-list" aria-label="Eventi in programma">
+      <article class="event" aria-labelledby="titolo-barbie">
+        <a class="event-island" href="./evento-barbie.html" aria-label="Scopri la serata Barbie">
+          <img src="./images/barbie_isola.png" alt="" width="1536" height="1024">
+        </a>
+
+        <div class="event-copy">
+          <h2 id="titolo-barbie">Barbie</h2>
+          <p class="event-description">Una serata tra colori pop e nostalgia, con un menù ispirato al mondo rosa di Barbie.</p>
+          <a class="button" href="./evento-barbie.html" aria-label="Scopri la serata Barbie">Scopri la serata</a>
+        </div>
+      </article>
+
+      <svg class="event-route route-desktop" viewBox="0 0 400 80"
+        preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M5 8 C125 8 275 72 395 72" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="3 8" vector-effect="non-scaling-stroke"></path>
+      </svg>
+
+      <svg class="event-route route-vertical" viewBox="0 0 60 64"
+        aria-hidden="true" focusable="false">
+        <path d="M23 4 C52 23 9 41 37 60" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="3 8"></path>
+      </svg>
+
+      <article class="event event--reverse" aria-labelledby="titolo-follie">
+        <div class="event-island">
+          <img src="./images/follie_isola.png" alt="Isola con gradoni di pietra e un lama"
+            width="1536" height="1024" loading="lazy">
+        </div>
+
+        <div class="event-copy">
+          <h2 id="titolo-follie">Le follie dell’imperatore</h2>
+          <p class="event-description">Una commedia da rivedere in compagnia, tra paesaggi andini, battute memorabili e un lama decisamente fuori posto.</p>
+          <p class="event-meta">Data e luogo da annunciare</p>
+        </div>
+      </article>
+
+      <svg class="event-route event-route--reverse route-desktop" viewBox="0 0 400 80"
+        preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path d="M5 8 C125 8 275 72 395 72" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="3 8" vector-effect="non-scaling-stroke"></path>
+      </svg>
+
+      <svg class="event-route event-route--reverse route-vertical" viewBox="0 0 60 64"
+        aria-hidden="true" focusable="false">
+        <path d="M23 4 C52 23 9 41 37 60" fill="none"
+          stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="3 8"></path>
+      </svg>
+
+      <article class="event" aria-labelledby="titolo-interstellar">
+        <div class="event-island">
+          <img src="./images/interstellar_isola.png"
+            alt="Isola con un campo di mais e un buco nero sullo schermo"
+            width="1536" height="1024" loading="lazy">
+        </div>
+
+        <div class="event-copy">
+          <h2 id="titolo-interstellar">Interstellar</h2>
+          <p class="event-description">Dal campo di mais ai confini dello spazio, una serata dedicata a un film che parla di tempo, distanza e di chi ci aspetta a casa.</p>
+          <p class="event-meta">Data e luogo da annunciare</p>
+        </div>
+      </article>
+    </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="footer-name" href="./index.html">QUARTAPARETE</a>
+        <a class="footer-email" href="mailto:info@quartaparete.events">
+          info@quartaparete.events
+        </a>
+      </div>
+
+      <nav aria-label="Informazioni sul sito">
+        <ul class="footer-links">
+          <li><a href="./privacy.html">Privacy Policy</a></li>
+          <li><a href="./termini.html">Terms of Service</a></li>
+          <li><a href="./faq.html">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <div role="group" aria-label="Social">
+        <!-- Aggiungi href="URL_DEL_PROFILO" al tag <a> del social corrispondente. -->
+        <ul class="social-links">
+          <li>
+            <a class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17.4" cy="6.7" r="1" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+          </li>
+
+          <li>
+            <a class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2V8.6h-1.26c-1.24 0-1.62.77-1.62 1.57v1.89h2.77l-.44 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06Z"></path>
+              </svg>
+            </a>
+          </li>
+
+          <li>
+            <a class="social-link" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M16 2h-3.2v13.7a2.8 2.8 0 1 1-2.1-2.7V9.7a6 6 0 1 0 5.3 6V8.8a8 8 0 0 0 4.7 1.5V7.1A4.7 4.7 0 0 1 16 2Z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-partner">
+        <span>In collaborazione con</span>
+        <img src="./images/logo-ubifilm-ok.png" alt="Ubifilm" loading="lazy">
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
