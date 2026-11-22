@@ -1,839 +1,767 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <meta name="description" content="Prototipo di prenotazione per la serata Barbie di QUARTAPARETE.">
+  <title>Prenotazione Barbie — QUARTAPARETE</title>
 
-  <title>Prenota Barbie | Cinematic Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      color-scheme: only light;
+      --paper: #f3ebd9;
+      --ivory: #faf4e8;
+      --ink: #30352f;
+      --red: #962f2a;
+      --red-hover: #73221e;
+      --rule: #c9bfab;
+      --display: "Bricolage Grotesque", Georgia, serif;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
 
     body {
-      background: #0d0d0d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 1rem/1.6 "DM Sans", system-ui, sans-serif;
     }
 
-    /* MENU PRINCIPALE */
+    [hidden] { display: none !important; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-underline-offset: .2em; }
+    a:hover { color: var(--red); }
+    :focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+    p, h1, h2, h3, dl, dd { margin: 0; }
 
-    .menu {
-      width: 100%;
-      padding: 28px 5%;
-      border-bottom: 1px solid #2c2c2c;
+    h1, h2, h3, legend {
+      font-family: var(--display);
+      line-height: 1.1;
     }
 
-    .menu ul {
-      display: flex;
-      justify-content: center;
-      gap: 42px;
-      list-style: none;
+    .wrap {
+      width: min(calc(100% - 3rem), 74rem);
+      margin-inline: auto;
     }
 
-    .menu a {
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: opacity 0.3s ease;
-    }
+    .narrow { max-width: 62rem; }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
-
-    /* STRUTTURA GENERALE */
-
-    .contenitore {
-      width: min(1000px, 90%);
-      margin: 0 auto;
-    }
-
-    .sezione {
-      padding: 85px 0;
-      border-bottom: 1px solid #2c2c2c;
-    }
-
-    .titolo-sezione {
-      margin-bottom: 35px;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1;
-      letter-spacing: -2px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    /* RIEPILOGO EVENTO */
-
-    .riepilogo {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      margin: 60px auto;
-      overflow: hidden;
-      border: 1px solid #393939;
-      background: #171717;
-    }
-
-    .riepilogo img {
-      width: 100%;
-      height: 100%;
-      min-height: 350px;
-      object-fit: cover;
-    }
-
-    .riepilogo-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 45px;
-    }
-
-    .riepilogo-info h1 {
-      margin-bottom: 30px;
-      font-size: clamp(45px, 7vw, 75px);
-      letter-spacing: -4px;
-      text-transform: uppercase;
-    }
-
-    .riepilogo-riga {
-      margin-top: 17px;
-    }
-
-    .riepilogo-riga span {
-      display: block;
-      margin-bottom: 5px;
-      color: #ff62b1;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .riepilogo-riga p {
-      font-size: 20px;
-      line-height: 1.4;
-    }
-
-    /* ALLERGENI */
-
-    .testo-allergeni {
-      color: #d0d0d0;
-      font-size: 18px;
-      line-height: 1.7;
-    }
-
-    .elenco-menu {
-      display: grid;
-      gap: 15px;
-      margin: 30px 0 0;
-      padding: 25px;
-      border: 1px solid #444444;
-      background: #171717;
-    }
-
-    .elenco-menu strong {
-      color: #ff62b1;
-    }
-
-    .legenda-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px 35px;
-      color: #c8c8c8;
-      line-height: 1.4;
-    }
-
-    /* TENDINE */
-
-    .tendina {
-      margin-top: 25px;
-      border: 1px solid #444444;
-      background: #171717;
-    }
-
-    .tendina summary {
-      position: relative;
-      padding: 22px 65px 22px 25px;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      cursor: pointer;
-      list-style: none;
-      text-transform: uppercase;
-    }
-
-    .tendina summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .tendina summary::after {
-      content: "+";
+    .skip {
       position: absolute;
-      top: 50%;
-      right: 25px;
-      color: #ff62b1;
-      font-size: 27px;
-      transform: translateY(-50%);
+      z-index: 2;
+      padding: .5rem 1rem;
+      background: var(--ivory);
+      transform: translateY(-150%);
     }
 
-    .tendina[open] summary::after {
-      content: "−";
+    .skip:focus { transform: translateY(0); }
+    .header { border-bottom: 1px solid var(--rule); }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.4rem;
+      min-height: 5rem;
     }
 
-    .contenuto-tendina {
-      padding: 5px 25px 25px;
+    .brand {
+      display: inline-block;
+      border: 2px solid currentColor;
+      padding: .48rem .65rem;
+      font: 700 1rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
     }
 
-    /* AVVISI */
-
-    .avviso-forte {
-      margin-top: 28px;
-      padding: 17px 20px;
-      border-left: 4px solid #ff62b1;
-      background: #24151d;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.4;
-      text-transform: uppercase;
+    .nav, .footer-links, .social-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .avviso-spiegazione {
-      margin-top: 18px;
-      color: #d0d0d0;
-      font-size: 16px;
-      line-height: 1.6;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem clamp(.9rem, 3vw, 2.4rem);
     }
 
-    /* FORM */
-
-    .form {
-      display: grid;
-      gap: 23px;
-      margin-top: 45px;
-    }
-
-    .riga-doppia {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .campo {
-      display: grid;
-      gap: 8px;
-    }
-
-    .campo label {
-      font-size: 13px;
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .nav a:hover,
+    .nav a[aria-current="location"] {
+      color: var(--red);
+      text-decoration: underline;
+    }
+
+    /* Riepilogo della serata */
+    .hero { padding-block: clamp(1.75rem, 5vw, 4rem); }
+
+    .event-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(1.25rem, 4vw, 3rem);
+      padding: clamp(1rem, 3vw, 2rem);
+      border: 1px solid var(--rule);
+      background: var(--ivory);
+    }
+
+    .poster { width: 100%; }
+
+    h1 {
+      margin-block: .35rem 1rem;
+      color: var(--red);
+      font-size: clamp(2.75rem, 8vw, 5.5rem);
+      letter-spacing: -.055em;
+    }
+
+    .event-status, .event-details dt {
+      color: var(--red);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .07em;
       text-transform: uppercase;
     }
 
-    .campo input,
-    .campo select,
-    .campo textarea {
+    .event-details {
+      display: grid;
+      gap: .6rem;
+    }
+
+    .event-details dd { font-weight: 600; }
+
+    /* Allergeni */
+    .section { padding-block: clamp(2rem, 6vw, 4rem); }
+
+    .section h2 {
+      margin-bottom: 1.5rem;
+      color: var(--red);
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      letter-spacing: -.045em;
+    }
+
+    .allergy-section { background: var(--ivory); }
+
+    .menu-summary, details, .notice, .confirmation, .preview {
+      padding: clamp(1rem, 3vw, 1.5rem);
+      border: 1px solid var(--rule);
+      border-radius: .3rem;
+    }
+
+    .menu-summary {
+      display: grid;
+      gap: .5rem;
+      margin-block: 1rem;
+      background: var(--paper);
+    }
+
+    .menu-summary dt {
+      display: inline;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .menu-summary dd {
+      display: inline;
+      margin-inline-start: .35rem;
+    }
+
+    details {
+      margin-bottom: 1rem;
+      background: var(--ivory);
+    }
+
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .toggle-open, .toggle-close {
+      color: var(--red);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .toggle-close, details[open] .toggle-open { display: none; }
+    details[open] .toggle-close { display: inline; }
+
+    .allergen-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .35rem 2rem;
+      margin: 1rem 0 0;
+      padding-inline-start: 1.65rem;
+    }
+
+    .allergen-list li::marker {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .notice {
+      border-inline-start: 4px solid var(--red);
+      background: var(--ivory);
+    }
+
+    .notice h3, .notice strong { color: var(--red); }
+    .notice p + p, .notice h3 + p { margin-top: .7rem; }
+    .allergy-contact { margin-top: 1rem; }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 3rem;
+      padding: .65rem 1.2rem;
+      border: 0;
+      border-radius: .3rem;
+      background: var(--red);
+      color: var(--ivory);
+      font: inherit;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: var(--red-hover);
+      color: var(--ivory);
+    }
+
+    /* Modulo di prenotazione */
+    .booking-form, .participants, .field {
+      display: grid;
+    }
+
+    .booking-form, .participants { gap: 1.2rem; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+    }
+
+    .field { gap: .35rem; min-width: 0; }
+    .field label { font-weight: 700; }
+
+    .field input, .field select {
       width: 100%;
-      padding: 16px;
-      border: 1px solid #555555;
-      border-radius: 0;
-      outline: none;
-      background: #181818;
-      color: #ffffff;
+      min-height: 3rem;
+      padding: .6rem .8rem;
+      border: 1px solid #817867;
+      border-radius: .3rem;
+      background: #fffcf7;
+      color: var(--ink);
       font: inherit;
     }
 
-    .campo input:focus,
-    .campo select:focus,
-    .campo textarea:focus {
-      border-color: #ff62b1;
+    .participant {
+      min-inline-size: 0;
+      margin: 0;
+      padding: clamp(1rem, 3vw, 1.5rem);
+      border: 1px solid var(--rule);
+      border-radius: .3rem;
+      background: var(--ivory);
     }
 
-    .campo textarea {
-      min-height: 150px;
-      resize: vertical;
+    .participant legend {
+      padding-inline: .4rem;
+      color: var(--red);
+      font-size: 1.35rem;
+      font-weight: 700;
     }
 
-    .pulsante {
-      padding: 17px 25px;
-      border: 2px solid #ff62b1;
-      background: #ff62b1;
-      color: #0d0d0d;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-    }
-
-    .pulsante:hover {
-      background: transparent;
-      color: #ff62b1;
-    }
-
-    .campo-esca {
-      display: none;
-    }
-
-    /* FORM CONTATTO A TENDINA */
-
-    .contatto-tendina {
-      margin-top: 28px;
-    }
-
-    .contatto-tendina .form {
-      margin-top: 15px;
-    }
-
-    /* PARTECIPANTI */
-
-    .partecipanti {
-      display: grid;
-      gap: 20px;
-      margin-top: 10px;
-    }
-
-    .partecipante {
-      padding: 25px;
-      border: 1px solid #444444;
-      background: #171717;
-    }
-
-    .partecipante h3 {
-      margin-bottom: 20px;
-      color: #ff62b1;
-      font-size: 17px;
-      text-transform: uppercase;
-    }
-
-    .nota-partecipanti {
-      color: #aaaaaa;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    /* CHECKBOX */
-
-    .conferma {
+    .confirmation {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      margin-top: 15px;
-      padding: 22px;
-      border: 1px solid #555555;
-      background: #171717;
+      gap: .75rem;
+      background: var(--ivory);
+      cursor: pointer;
     }
 
-    .conferma input {
-      width: 20px;
-      height: 20px;
-      margin-top: 2px;
-      accent-color: #ff62b1;
-      cursor: pointer;
+    .confirmation input {
       flex: 0 0 auto;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin: .2rem 0 0;
+      accent-color: var(--red);
     }
 
-    .conferma label {
-      font-size: 16px;
-      line-height: 1.5;
-      cursor: pointer;
+    .booking-action .button { width: 100%; }
+    .prototype-note { margin-top: .65rem; text-align: center; }
+
+    .preview {
+      margin-top: 1.2rem;
+      background: var(--ivory);
     }
 
-    .nota-prototipo {
-      color: #aaaaaa;
-      font-size: 14px;
-      line-height: 1.5;
+    .preview h3 { color: var(--red); }
+    .preview p { margin-top: .55rem; }
+    .preview ol { margin-bottom: 0; padding-inline-start: 1.6rem; }
+    .preview li { overflow-wrap: anywhere; }
+
+    /* Footer standard */
+    .footer {
+      border-top: 1px solid var(--rule);
+      background: var(--ivory);
+      padding-block: 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      gap: 1.5rem;
       text-align: center;
     }
 
-    /* VERSIONE TELEFONO */
+    .footer-grid > * { min-width: 0; }
 
-    @media (max-width: 750px) {
-      .menu {
-        padding: 22px 20px;
-        overflow-x: auto;
+    .footer-name {
+      font: 700 1.3rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    .footer-email {
+      display: block;
+      margin-top: .3rem;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-links { display: grid; gap: .35rem; }
+
+    .social-links, .footer-partner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links { gap: .25rem; }
+
+    .social-link {
+      display: grid;
+      width: 2.75rem;
+      height: 2.75rem;
+      place-items: center;
+    }
+
+    .social-link svg { width: 1.5rem; height: 1.5rem; }
+
+    .footer-partner {
+      flex-wrap: wrap;
+      gap: .25rem .5rem;
+    }
+
+    .footer-partner img {
+      flex: 0 0 auto;
+      width: 6rem;
+      height: 2.75rem;
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        display: grid;
+        justify-items: end;
+        gap: .5rem;
+        padding-block: 1rem .5rem;
       }
 
-      .menu ul {
-        width: max-content;
-        justify-content: flex-start;
-        gap: 25px;
-      }
+      .header-inner nav { grid-row: 2; width: 100%; }
+      .nav { justify-content: center; }
+      .event-summary { grid-template-columns: minmax(0, 1fr); text-align: center; }
+      .poster { width: min(100%, 10rem); margin-inline: auto; }
+    }
 
-      .menu a {
-        font-size: 12px;
-        white-space: nowrap;
-      }
+    @media (max-width: 460px) {
+      .wrap { width: calc(100% - 2rem); }
+      .nav a { font-size: .85rem; }
 
-      .riepilogo {
-        grid-template-columns: 1fr;
-      }
-
-      .riepilogo img {
-        min-height: auto;
-        aspect-ratio: 3 / 4;
-      }
-
-      .riepilogo-info {
-        padding: 35px 25px;
-      }
-
-      .riga-doppia,
-      .legenda-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sezione {
-        padding: 65px 0;
-      }
-
-      .tendina summary {
-        padding: 20px 55px 20px 20px;
-        font-size: 14px;
-      }
-
-      .tendina summary::after {
-        right: 20px;
-      }
-
-      .contenuto-tendina {
-        padding: 5px 20px 22px;
+      .form-grid, .allergen-list, .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
 </head>
 
 <body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
 
-  <!-- MENU PRINCIPALE -->
+  <header class="header">
+    <div class="wrap header-inner">
+      <nav aria-label="Menu principale">
+        <ul class="nav">
+          <li><a href="./progetto.html">Il progetto</a></li>
+          <li><a href="./collabora.html">Collabora con noi</a></li>
+          <li><a href="./eventi.html" aria-current="location">Eventi</a></li>
+          <li><a href="./contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
 
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="progetto.html">Il progetto</a></li>
-      <li><a href="collabora.html">Collabora con noi</a></li>
-      <li><a href="eventi.html">Eventi</a></li>
-      <li><a href="contatti.html">Contatti</a></li>
-    </ul>
-  </nav>
+      <a class="brand" href="./index.html" aria-label="Quarta Parete, home">
+        QUARTAPARETE
+      </a>
+    </div>
+  </header>
 
-  <main>
+  <main id="contenuto">
+    <section class="wrap narrow hero" aria-labelledby="titolo-evento">
+      <div class="event-summary">
+        <img class="poster" src="./images/barbie.jpeg"
+          alt="Locandina del film Barbie" fetchpriority="high">
 
-    <!-- RIEPILOGO EVENTO -->
-
-    <section class="contenitore">
-      <div class="riepilogo">
-
-        <img
-          src="images/barbie.jpeg"
-          alt="Locandina dell’evento Barbie"
-        >
-
-        <div class="riepilogo-info">
-          <h1>Barbie</h1>
-
-          <div class="riepilogo-riga">
-            <span>Dove</span>
-            <p>Ristorante Blabla · Soncino</p>
-          </div>
-
-          <div class="riepilogo-riga">
-            <span>Quando</span>
-            <p>14 settembre 2026</p>
-          </div>
-
-          <div class="riepilogo-riga">
-            <span>Costo</span>
-            <p>85,00 € a persona</p>
-          </div>
+        <div>
+          <p class="event-status">Evento dimostrativo</p>
+          <h1 id="titolo-evento">BARBIE</h1>
+          <dl class="event-details">
+            <div>
+              <dt>Dove</dt>
+              <dd>Ristorante Blabla · Soncino</dd>
+            </div>
+            <div>
+              <dt>Quando</dt>
+              <dd><time datetime="2026-09-14">14 settembre 2026</time></dd>
+            </div>
+            <div>
+              <dt>Costo</dt>
+              <dd>85,00 € a persona</dd>
+            </div>
+          </dl>
         </div>
-
       </div>
     </section>
 
-    <!-- ALLERGIE E INTOLLERANZE -->
+    <section class="section allergy-section" id="allergeni"
+      aria-labelledby="titolo-allergeni">
+      <div class="wrap narrow">
+        <h2 id="titolo-allergeni">Informazioni su allergie e intolleranze</h2>
+        <p>Qui trovi gli allergeni indicati per i tre menù dimostrativi della serata.</p>
 
-    <section class="sezione">
-      <div class="contenitore">
+        <dl class="menu-summary">
+          <div><dt>Menù standard</dt><dd>1 · 3 · 4 · 6 · 7 · 8 · 12</dd></div>
+          <div><dt>Menù vegetariano</dt><dd>1 · 3 · 7 · 8</dd></div>
+          <div><dt>Menù senza glutine</dt><dd>4 · 7 · 8</dd></div>
+        </dl>
 
-        <h2 class="titolo-sezione">
-          Informazioni su allergie e intolleranze
-        </h2>
+        <details>
+          <summary>
+            Consulta la legenda degli allergeni
+            <span aria-hidden="true">
+              <span class="toggle-open">+</span>
+              <span class="toggle-close">−</span>
+            </span>
+          </summary>
 
-        <p class="testo-allergeni">
-          Il menu della serata contiene i seguenti allergeni:
-        </p>
+          <ol class="allergen-list">
+            <li>Cereali contenenti glutine</li>
+            <li>Crostacei</li>
+            <li>Uova</li>
+            <li>Pesce</li>
+            <li>Arachidi</li>
+            <li>Soia</li>
+            <li>Latte</li>
+            <li>Frutta a guscio</li>
+            <li>Sedano</li>
+            <li>Senape</li>
+            <li>Sesamo</li>
+            <li>Anidride solforosa e solfiti</li>
+            <li>Lupini</li>
+            <li>Molluschi</li>
+          </ol>
+        </details>
 
-        <div class="elenco-menu">
+        <div class="notice">
+          <p><strong>Le alternative previste sono quelle indicate sopra.</strong></p>
           <p>
-            <strong>Menu standard:</strong>
-            1 · 3 · 4 · 6 · 7 · 8 · 12
-          </p>
-
-          <p>
-            <strong>Menu vegetariano:</strong>
-            1 · 5 · 10
-          </p>
-
-          <p>
-            <strong>Menu celiaco:</strong>
-            2 · 13
+            Se tu o una persona del tuo tavolo avete un’allergia o un’intolleranza,
+            scrivici prima di prenotare. Verificheremo con il ristorante se è
+            possibile gestire la vostra esigenza.
           </p>
         </div>
 
-        <!-- LEGENDA A TENDINA -->
-
-        <details class="tendina">
-          <summary>Consulta la legenda degli allergeni</summary>
-
-          <div class="contenuto-tendina">
-            <div class="legenda-grid">
-              <p><strong>1</strong> — Glutine</p>
-              <p><strong>2</strong> — Crostacei</p>
-              <p><strong>3</strong> — Uova</p>
-              <p><strong>4</strong> — Pesce</p>
-              <p><strong>5</strong> — Arachidi</p>
-              <p><strong>6</strong> — Soia</p>
-              <p><strong>7</strong> — Latte</p>
-              <p><strong>8</strong> — Frutta a guscio</p>
-              <p><strong>9</strong> — Sedano</p>
-              <p><strong>10</strong> — Senape</p>
-              <p><strong>11</strong> — Sesamo</p>
-              <p><strong>12</strong> — Solfiti</p>
-              <p><strong>13</strong> — Lupini</p>
-              <p><strong>14</strong> — Molluschi</p>
-            </div>
-          </div>
-        </details>
-
-        <!-- AVVISI IMPORTANTI -->
-
-        <p class="avviso-forte">
-          Le alternative disponibili per questa serata sono esclusivamente
-          quelle indicate sopra.
-        </p>
-
-        <p class="avviso-spiegazione">
-          Se tu o una persona del tuo tavolo avete un’allergia a uno degli
-          allergeni presenti, oppure un’allergia a un alimento non compreso
-          nella lista degli allergeni UE, non procedere con la prenotazione
-          senza averci prima contattato. Verificheremo con il ristorante se
-          sia possibile gestire la specifica esigenza in sicurezza.
-        </p>
-
-        <!-- FORM DI CONTATTO A TENDINA -->
-
-        <details class="tendina contatto-tendina">
-          <summary>Hai un dubbio sugli allergeni? Contattaci</summary>
-
-          <div class="contenuto-tendina">
-
-            <form
-              class="form"
-              action="https://formsubmit.co/ilaria.bergo.bergonzi@gmail.com"
-              method="POST"
-            >
-
-              <input
-                type="hidden"
-                name="_subject"
-                value="Richiesta allergeni — Evento Barbie"
-              >
-
-              <input
-                type="hidden"
-                name="_template"
-                value="table"
-              >
-
-              <input
-                type="hidden"
-                name="Evento"
-                value="Barbie — 14 settembre 2026"
-              >
-
-              <input
-                class="campo-esca"
-                type="text"
-                name="_honey"
-                tabindex="-1"
-                autocomplete="off"
-              >
-
-              <div class="riga-doppia">
-
-                <div class="campo">
-                  <label for="contatto-nome">Nome</label>
-
-                  <input
-                    id="contatto-nome"
-                    name="Nome"
-                    type="text"
-                    autocomplete="given-name"
-                    required
-                  >
-                </div>
-
-                <div class="campo">
-                  <label for="contatto-cognome">Cognome</label>
-
-                  <input
-                    id="contatto-cognome"
-                    name="Cognome"
-                    type="text"
-                    autocomplete="family-name"
-                    required
-                  >
-                </div>
-
-              </div>
-
-              <div class="campo">
-                <label for="contatto-email">Email</label>
-
-                <input
-                  id="contatto-email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                >
-              </div>
-
-              <div class="campo">
-                <label for="contatto-messaggio">
-                  Descrivi l’allergia o l’esigenza alimentare
-                </label>
-
-                <textarea
-                  id="contatto-messaggio"
-                  name="Messaggio"
-                  required
-                ></textarea>
-              </div>
-
-              <button class="pulsante" type="submit">
-                Chiedi informazioni
-              </button>
-
-            </form>
-
-          </div>
-        </details>
-
+        <div class="allergy-contact">
+          <a class="button" href="./contatti.html#modulo-contatto">
+            Hai un dubbio sugli allergeni? Contattaci
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- PRENOTAZIONE -->
+    <section class="wrap narrow section" aria-labelledby="titolo-prenotazione">
+      <h2 id="titolo-prenotazione">Prenota il tuo tavolo</h2>
 
-    <section class="sezione">
-      <div class="contenitore">
+      <noscript>
+        <p>Attiva JavaScript per provare la selezione dei partecipanti e dei menù.</p>
+      </noscript>
 
-        <h2 class="titolo-sezione">
-          Prenota il tuo tavolo
-        </h2>
-
-        <form class="form" id="form-prenotazione">
-
-          <div class="riga-doppia">
-
-            <div class="campo">
-              <label for="nome-prenotazione">Nome</label>
-
-              <input
-                id="nome-prenotazione"
-                name="nome"
-                type="text"
-                autocomplete="given-name"
-                required
-              >
-            </div>
-
-            <div class="campo">
-              <label for="cognome-prenotazione">Cognome</label>
-
-              <input
-                id="cognome-prenotazione"
-                name="cognome"
-                type="text"
-                autocomplete="family-name"
-                required
-              >
-            </div>
-
+      <form class="booking-form" id="modulo-prenotazione" hidden>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" autocomplete="given-name" required>
           </div>
 
-          <div class="riga-doppia">
-
-            <div class="campo">
-              <label for="email-prenotazione">Email</label>
-
-              <input
-                id="email-prenotazione"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-              >
-            </div>
-
-            <div class="campo">
-              <label for="telefono">Numero di telefono</label>
-
-              <input
-                id="telefono"
-                name="telefono"
-                type="tel"
-                autocomplete="tel"
-                required
-              >
-            </div>
-
+          <div class="field">
+            <label for="cognome">Cognome</label>
+            <input type="text" id="cognome" name="cognome"
+              autocomplete="family-name" required>
           </div>
 
-          <div class="campo">
-            <label for="numero-partecipanti">
-              Numero totale di partecipanti
-            </label>
-
-            <select id="numero-partecipanti" required>
-              <option value="">Seleziona</option>
-              <option value="1">1 partecipante</option>
-              <option value="2">2 partecipanti</option>
-              <option value="3">3 partecipanti</option>
-              <option value="4">4 partecipanti</option>
-              <option value="5">5 partecipanti</option>
-              <option value="6">6 partecipanti</option>
-              <option value="7">7 partecipanti</option>
-              <option value="8">8 partecipanti</option>
-              <option value="9">9 partecipanti</option>
-              <option value="10">10 partecipanti</option>
-            </select>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
 
-          <p class="nota-partecipanti">
-            Dopo aver scelto il numero totale, indica il nome e il menu
-            desiderato per ogni persona inclusa nella prenotazione.
+          <div class="field">
+            <label for="telefono">Numero di telefono</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="numero-partecipanti">Numero totale di partecipanti</label>
+          <select id="numero-partecipanti" name="partecipanti"
+            aria-describedby="istruzioni-partecipanti" required>
+            <option value="">Seleziona</option>
+          </select>
+          <p id="istruzioni-partecipanti">
+            Includi il referente se partecipa. Poi indica nome, cognome e menù
+            per ogni persona del tavolo.
           </p>
+        </div>
 
-          <!-- QUI COMPAIONO AUTOMATICAMENTE I PARTECIPANTI -->
+        <div class="participants" id="partecipanti"></div>
 
-          <div
-            class="partecipanti"
-            id="elenco-partecipanti"
-          ></div>
+        <label class="confirmation">
+          <input type="checkbox" name="conferma-allergeni" required>
+          <span>
+            Ho letto le informazioni sugli allergeni e confermo che le esigenze
+            alimentari delle persone incluse nella prenotazione sono compatibili
+            con i menù selezionati.
+          </span>
+        </label>
 
-          <!-- CONFERMA ALLERGENI -->
+        <aside class="notice" aria-labelledby="titolo-pagamento">
+          <h3 id="titolo-pagamento">Quando avviene il pagamento?</h3>
+          <p>
+            Nella prenotazione effettiva ti chiederemo i dati della carta.
+            <strong>
+              L’addebito è previsto per il
+              <time datetime="2026-09-07">7 settembre 2026</time>,
+              se la serata sarà confermata.
+            </strong>
+            Riceverai un’email di promemoria qualche giorno prima.
+          </p>
+          <p>
+            Puoi annullare senza costi scrivendo a
+            <a href="mailto:info@quartaparete.events">info@quartaparete.events</a>
+            <strong>prima del 7 settembre</strong>.
+            Se annulliamo noi la serata, non ti verrà addebitato nulla.
+          </p>
+        </aside>
 
-          <div class="conferma">
-            <input
-              id="conferma-allergeni"
-              type="checkbox"
-              required
-            >
-
-            <label for="conferma-allergeni">
-              Ho letto le informazioni relative agli allergeni e confermo
-              che le esigenze alimentari delle persone incluse nella
-              prenotazione sono compatibili con i menu selezionati.
-            </label>
-          </div>
-
-          <button class="pulsante" type="submit">
+        <div class="booking-action">
+          <button class="button" type="submit" aria-describedby="nota-prototipo">
             Continua
           </button>
-
-          <p class="nota-prototipo">
-            Prototipo: in questa fase il pulsante non registra la prenotazione
-            e non richiede alcun pagamento.
+          <p class="prototype-note" id="nota-prototipo">
+            <strong>Prototipo:</strong> in questa fase il pulsante non registra
+            la prenotazione e non richiede alcun pagamento.
           </p>
+        </div>
+      </form>
 
-        </form>
+      <section class="preview" id="riepilogo-prova"
+        aria-labelledby="titolo-riepilogo" hidden>
+        <h3 id="titolo-riepilogo" tabindex="-1">Riepilogo di prova</h3>
+        <p id="totale-prova"></p>
+        <ol id="menu-selezionati"></ol>
+        <p>Questa è un’anteprima. I dati restano in questa pagina.</p>
+      </section>
 
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    const selezioneNumero =
-      document.getElementById("numero-partecipanti");
-
-    const elencoPartecipanti =
-      document.getElementById("elenco-partecipanti");
-
-    const formPrenotazione =
-      document.getElementById("form-prenotazione");
-
-    selezioneNumero.addEventListener("change", function () {
-      const numero = Number(this.value);
-
-      elencoPartecipanti.innerHTML = "";
-
-      for (let i = 1; i <= numero; i++) {
-        const partecipante = document.createElement("div");
-
-        partecipante.className = "partecipante";
-
-        partecipante.innerHTML = `
-          <h3>Partecipante ${i}</h3>
-
-          <div class="riga-doppia">
-
-            <div class="campo">
-              <label for="partecipante-${i}">
-                Nome e cognome
-              </label>
-
-              <input
-                id="partecipante-${i}"
-                name="partecipante-${i}"
-                type="text"
-                required
-              >
+      <template id="modello-partecipante">
+        <fieldset class="participant">
+          <legend></legend>
+          <div class="form-grid">
+            <div class="field">
+              <label>Nome e cognome</label>
+              <input type="text" data-guest-name autocomplete="off" required>
             </div>
-
-            <div class="campo">
-              <label for="menu-${i}">
-                Menu
-              </label>
-
-              <select
-                id="menu-${i}"
-                name="menu-${i}"
-                required
-              >
-                <option value="">Seleziona il menu</option>
-                <option value="standard">Menu standard</option>
-                <option value="vegetariano">Menu vegetariano</option>
-                <option value="celiaco">Menu celiaco</option>
+            <div class="field">
+              <label>Menù</label>
+              <select data-guest-menu required>
+                <option value="">Seleziona il menù</option>
+                <option value="Menù standard">Menù standard</option>
+                <option value="Menù vegetariano">Menù vegetariano</option>
+                <option value="Menù senza glutine">Menù senza glutine</option>
               </select>
             </div>
-
           </div>
-        `;
+        </fieldset>
+      </template>
+    </section>
+  </main>
 
-        elencoPartecipanti.appendChild(partecipante);
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="footer-name" href="./index.html">QUARTAPARETE</a>
+        <a class="footer-email" href="mailto:info@quartaparete.events">
+          info@quartaparete.events
+        </a>
+      </div>
+
+      <nav aria-label="Informazioni sul sito">
+        <ul class="footer-links">
+          <li><a href="./privacy.html">Privacy Policy</a></li>
+          <li><a href="./termini.html">Terms of Service</a></li>
+          <li><a href="./faq.html">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <div role="group" aria-label="Social">
+        <!-- Aggiungi href="URL_DEL_PROFILO" ai tag <a> quando hai i link ufficiali. -->
+        <ul class="social-links">
+          <li>
+            <a class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17.4" cy="6.7" r="1" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2V8.6h-1.26c-1.24 0-1.62.77-1.62 1.57v1.89h2.77l-.44 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06Z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a class="social-link" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M16 2h-3.2v13.7a2.8 2.8 0 1 1-2.1-2.7V9.7a6 6 0 1 0 5.3 6V8.8a8 8 0 0 0 4.7 1.5V7.1A4.7 4.7 0 0 1 16 2Z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-partner">
+        <span>In collaborazione con</span>
+        <img src="./images/logo-ubifilm-ok.png" alt="Ubifilm" loading="lazy">
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const maxPartecipanti = 10;
+    const prezzoPersona = 85;
+    const valuta = new Intl.NumberFormat('it-IT', {
+      style: 'currency',
+      currency: 'EUR'
+    });
+
+    const form = document.querySelector('#modulo-prenotazione');
+    const numero = document.querySelector('#numero-partecipanti');
+    const partecipanti = document.querySelector('#partecipanti');
+    const modello = document.querySelector('#modello-partecipante');
+    const riepilogo = document.querySelector('#riepilogo-prova');
+    const titoloRiepilogo = document.querySelector('#titolo-riepilogo');
+    const totale = document.querySelector('#totale-prova');
+    const menuSelezionati = document.querySelector('#menu-selezionati');
+
+    for (let indice = 1; indice <= maxPartecipanti; indice += 1) {
+      const etichetta = indice === 1 ? '1 partecipante' : `${indice} partecipanti`;
+      numero.add(new Option(etichetta, String(indice)));
+    }
+
+    function aggiungiPartecipante(indice) {
+      const scheda = modello.content.cloneNode(true);
+      const nome = scheda.querySelector('[data-guest-name]');
+      const menu = scheda.querySelector('[data-guest-menu]');
+
+      scheda.querySelector('legend').textContent = `Partecipante ${indice}`;
+      nome.id = `nome-partecipante-${indice}`;
+      menu.id = `menu-partecipante-${indice}`;
+      nome.previousElementSibling.htmlFor = nome.id;
+      menu.previousElementSibling.htmlFor = menu.id;
+
+      partecipanti.append(scheda);
+    }
+
+    function aggiornaPartecipanti() {
+      const quanti = Number(numero.value);
+
+      while (partecipanti.children.length > quanti) {
+        partecipanti.lastElementChild.remove();
       }
+
+      while (partecipanti.children.length < quanti) {
+        aggiungiPartecipante(partecipanti.children.length + 1);
+      }
+    }
+
+    numero.addEventListener('change', aggiornaPartecipanti);
+
+    form.addEventListener('input', () => {
+      riepilogo.hidden = true;
+      menuSelezionati.replaceChildren();
     });
 
-    formPrenotazione.addEventListener("submit", function (evento) {
+    form.addEventListener('submit', (evento) => {
       evento.preventDefault();
+      aggiornaPartecipanti();
 
-      alert(
-        "Il modulo è completo. Nel prossimo passaggio collegheremo disponibilità, prenotazione e pagamento."
-      );
+      if (!form.reportValidity()) return;
+
+      const schede = [...partecipanti.children];
+      const righe = schede.map((scheda) => {
+        const nome = scheda.querySelector('[data-guest-name]').value.trim();
+        const menu = scheda.querySelector('[data-guest-menu]').value;
+        const riga = document.createElement('li');
+        riga.textContent = `${nome || 'Partecipante'} · ${menu}`;
+        return riga;
+      });
+
+      menuSelezionati.replaceChildren(...righe);
+      const quanti = schede.length;
+      const etichetta = quanti === 1 ? '1 partecipante' : `${quanti} partecipanti`;
+      totale.textContent = `${etichetta} · Totale dimostrativo ${valuta.format(quanti * prezzoPersona)}`;
+      riepilogo.hidden = false;
+      titoloRiepilogo.focus();
     });
-  </script>
 
+    aggiornaPartecipanti();
+    form.hidden = false;
+  </script>
 </body>
 </html>
