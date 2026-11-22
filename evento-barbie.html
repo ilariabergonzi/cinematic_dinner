@@ -1,707 +1,698 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <meta name="description" content="Scopri la serata dimostrativa di QUARTAPARETE dedicata a Barbie, con proiezione e menù di quattro portate ispirato al film.">
+  <title>Barbie — QUARTAPARETE</title>
 
-  <title>Barbie | Cinematic Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      color-scheme: only light;
+      --paper: #f3ebd9;
+      --ivory: #faf4e8;
+      --ink: #30352f;
+      --red: #962f2a;
+      --red-hover: #73221e;
+      --rule: #c9bfab;
+      --display: "Bricolage Grotesque", Georgia, serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     body {
-      background-color: #0d0d0d;
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 1rem/1.6 "DM Sans", system-ui, sans-serif;
     }
 
-    /* MENU */
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-underline-offset: .2em; }
+    :focus-visible { outline: 3px solid var(--red); outline-offset: 5px; }
+    h1, h2, h3, h4, p, dl, dd { margin: 0; }
 
-    .menu {
-      width: 100%;
-      padding: 28px 5%;
-      border-bottom: 1px solid #2c2c2c;
+    h1, h2, h3, h4 {
+      font-family: var(--display);
+      line-height: 1.1;
+      letter-spacing: -.045em;
     }
 
-    .menu ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 42px;
-      list-style: none;
+    .wrap {
+      width: min(100% - 3rem, 74rem);
+      margin-inline: auto;
     }
 
-    .menu a {
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: opacity 0.3s ease;
-    }
-
-    .menu a:hover {
-      opacity: 0.6;
-    }
-
-    /* STRUTTURA GENERALE */
-
-    .contenitore {
-      width: min(1200px, 90%);
-      margin: 0 auto;
-    }
-
-    .sezione {
-      padding: 100px 0;
-      border-bottom: 1px solid #2c2c2c;
-    }
-
-    .titolo-sezione {
-      margin-bottom: 45px;
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: 1;
-      letter-spacing: -3px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    /* INTESTAZIONE EVENTO */
-
-    .evento-intro {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 720px;
-      margin-top: 70px;
-      border: 1px solid #333333;
-    }
-
-    .evento-locandina {
-      width: 100%;
-      height: 100%;
-      min-height: 720px;
-      object-fit: cover;
-    }
-
-    .evento-dettagli {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(45px, 7vw, 90px);
-      background-color: #171717;
-    }
-
-    .evento-dettagli h1 {
-      margin-bottom: 70px;
-      font-size: clamp(65px, 9vw, 125px);
-      line-height: 0.85;
-      letter-spacing: -6px;
-      text-transform: uppercase;
-    }
-
-    .informazione + .informazione {
-      margin-top: 45px;
-    }
-
-    .informazione h2 {
-      margin-bottom: 10px;
-      color: #ff62b1;
-      font-size: 15px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .informazione p {
-      font-size: clamp(22px, 2.5vw, 34px);
-      line-height: 1.25;
-    }
-    
-    .prenota {
-      display: block;
-      width: 100%;
-      margin-top: 55px;
-      padding: 18px 25px;
-      border: 2px solid #ff62b1;
-      background-color: #ff62b1;
-      color: #0d0d0d;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
-    }
-
-    .prenota:hover {
-      background-color: transparent;
-      color: #ff62b1;
-    }
-
-    /* ESPERIENZA */
-
-    .esperienza {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .esperienza p {
-      color: #d0d0d0;
-      font-size: clamp(19px, 2.2vw, 26px);
-      line-height: 1.7;
-    }
-
-    .esperienza p + p {
-      margin-top: 25px;
-    }
-
-    /* MENU DELLA SERATA */
-
-    .menu-serata {
-      max-width: 850px;
-      margin: 0 auto;
-    }
-
-    .portata {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      align-items: baseline;
-      gap: 25px;
-      padding: 25px 0;
-      border-bottom: 1px solid #333333;
-    }
-
-    .tipo-portata {
-      color: #ff62b1;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .nome-portata {
-      font-size: clamp(22px, 3vw, 32px);
-      line-height: 1.3;
-    }
-
-    .allergeni-numeri {
-      margin-left: 8px;
-      color: #bdbdbd;
-      font-size: 14px;
-      font-weight: 400;
-      vertical-align: super;
-    }
-
-    .legenda {
-      margin-top: 55px;
-      padding: 35px;
-      background-color: #171717;
-      border: 1px solid #333333;
-    }
-
-    .legenda h3 {
-      margin-bottom: 25px;
-      font-size: 18px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .legenda-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 13px 35px;
-      color: #c8c8c8;
-      font-size: 15px;
-      line-height: 1.4;
-    }
-
-    /* ESIGENZE ALIMENTARI */
-
-    .esigenze-intro {
-      margin: -20px 0 45px;
-      color: #d0d0d0;
-      font-size: clamp(19px, 2vw, 25px);
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .menu-speciali {
-      max-width: 850px;
-      margin: 0 auto;
-    }
-
-    .menu-speciale {
-      margin-bottom: 18px;
-      border: 1px solid #444444;
-      background-color: #171717;
-    }
-
-    .menu-speciale summary {
-      position: relative;
-      padding: 25px 65px 25px 25px;
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-      list-style: none;
-      text-transform: uppercase;
-    }
-
-    .menu-speciale summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .menu-speciale summary::after {
-      content: "+";
+    .skip {
       position: absolute;
-      top: 50%;
-      right: 25px;
-      color: #ff62b1;
-      font-size: 30px;
-      transform: translateY(-50%);
+      z-index: 2;
+      padding: .5rem 1rem;
+      background: var(--ivory);
+      transform: translateY(-150%);
     }
 
-    .menu-speciale[open] summary::after {
-      content: "−";
+    .skip:focus { transform: translateY(0); }
+
+    /* Menu standard */
+    .header { border-bottom: 1px solid var(--rule); }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.4rem;
+      min-height: 5rem;
     }
 
-    .menu-speciale p {
-      padding: 0 25px 25px;
-      color: #c8c8c8;
-      font-size: 17px;
-      line-height: 1.6;
+    .brand {
+      display: inline-block;
+      border: 2px solid currentColor;
+      padding: .48rem .65rem;
+      font: 700 1rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
     }
 
-    .menu-speciale strong {
-      color: #ffffff;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem clamp(.9rem, 3vw, 2.4rem);
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    /* CONTATTI */
-
-    .contatti-evento {
-      max-width: 700px;
-      margin: 0 auto;
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      font-weight: 700;
+      text-decoration: none;
     }
 
-    .contatti-testo {
-      margin: -20px 0 45px;
-      color: #d0d0d0;
-      font-size: 20px;
-      line-height: 1.5;
+    .brand:hover,
+    .nav a:hover,
+    .nav a[aria-current="location"] { color: var(--red); }
+
+    .nav a:hover,
+    .nav a[aria-current="location"] { text-decoration: underline; }
+
+    /* Locandina e informazioni della serata */
+    .hero {
+      padding-block: clamp(2rem, 6vw, 5rem);
+    }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      border: 1px solid var(--rule);
+      background: var(--ivory);
+    }
+
+    .poster {
+      display: flex;
+      align-items: center;
+      background: var(--paper);
+    }
+
+    .poster img { width: 100%; }
+
+    .event-info {
+      align-self: center;
+      padding: clamp(1.5rem, 5vw, 4.5rem);
+    }
+
+    .event-status {
+      margin-bottom: .5rem;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .event-info h1 {
+      color: var(--red);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+    }
+
+    .event-details {
+      display: grid;
+      gap: 1rem;
+      margin-top: clamp(1.1rem, 3vw, 2rem);
+    }
+
+    .event-details dt,
+    .course {
+      color: var(--red);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .event-details dd {
+      margin-top: .15rem;
+      font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+      font-weight: 600;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: .65rem 1.25rem;
+      border-radius: .3rem;
+      background: var(--red);
+      color: var(--ivory);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button:hover { background: var(--red-hover); }
+    .event-info .button { margin-top: 1.5rem; }
+
+    /* Esperienza e menù */
+    .section { padding-block: clamp(2.75rem, 7vw, 5.5rem); }
+
+    .section h2 {
+      color: var(--red);
+      text-align: center;
+      font-size: clamp(2rem, 5.5vw, 4rem);
+    }
+
+    .experience { background: var(--ivory); }
+    .experience .wrap { max-width: 46rem; text-align: center; }
+
+    .experience p {
+      margin-top: 1rem;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+
+    .menu-section { max-width: 56rem; }
+
+    .menu-list {
+      margin: 1.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: minmax(0, 7rem) minmax(0, 1fr);
+      gap: .35rem 1.2rem;
+      padding-block: 1.15rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .course { padding-top: .25rem; }
+
+    .dish-name {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      overflow-wrap: anywhere;
+    }
+
+    .dish-description { margin-top: .4rem; }
+
+    .allergens {
+      display: inline-block;
+      color: var(--red);
+      font: 700 .85rem/1.4 "DM Sans", system-ui, sans-serif;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .allergen-legend {
+      margin-top: 2rem;
+      padding: clamp(1.15rem, 4vw, 2rem);
+      border: 1px solid var(--rule);
+      background: var(--ivory);
+    }
+
+    .allergen-legend h3 { font-size: 1.5rem; }
+
+    .allergen-legend ol {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .3rem 2rem;
+      margin: .85rem 0 0;
+      padding-inline-start: 1.6rem;
+    }
+
+    .allergen-legend li::marker {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* Menù alternativi */
+    .alternatives {
+      border-top: 1px solid var(--rule);
+    }
+
+    .alternatives .wrap { max-width: 56rem; }
+
+    .alternatives-intro {
+      margin: .85rem auto 1.75rem;
       text-align: center;
     }
 
-    .contatti-form {
-      display: grid;
-      gap: 24px;
+    .alternative {
+      border: 1px solid var(--rule);
+      border-radius: .3rem;
+      background: var(--ivory);
     }
 
-    .campo {
-      display: grid;
-      gap: 9px;
-    }
+    .alternative + .alternative { margin-top: .75rem; }
 
-    .campo label {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .campo input,
-    .campo textarea {
-      width: 100%;
-      padding: 16px;
-      border: 1px solid #555555;
-      border-radius: 0;
-      outline: none;
-      background-color: #181818;
-      color: #ffffff;
-      font: inherit;
-    }
-
-    .campo input:focus,
-    .campo textarea:focus {
-      border-color: #ffffff;
-    }
-
-    .campo textarea {
-      min-height: 190px;
-      resize: vertical;
-    }
-
-    .invia {
-      margin-top: 10px;
-      padding: 17px 28px;
-      border: 1px solid #ffffff;
-      background-color: #ffffff;
-      color: #0d0d0d;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1px;
+    .alternative summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
       cursor: pointer;
-      text-transform: uppercase;
-      transition:
-        background-color 0.3s ease,
-        color 0.3s ease;
+      list-style: none;
+      font: 700 clamp(1.1rem, 2.5vw, 1.4rem)/1.25 var(--display);
     }
 
-    .invia:hover {
-      background-color: transparent;
-      color: #ffffff;
+    .alternative summary::-webkit-details-marker { display: none; }
+
+    .toggle-symbol {
+      flex-shrink: 0;
+      color: var(--red);
+      font-size: 1.6rem;
+      line-height: 1;
     }
 
-    .campo-esca {
-      display: none;
+    .toggle-close,
+    .alternative[open] .toggle-open { display: none; }
+    .alternative[open] .toggle-close { display: inline; }
+
+    .alternative .menu-list {
+      margin: 0;
+      padding: 0 1.25rem .25rem;
     }
 
-    /* VERSIONE TELEFONO */
+    .alternative .menu-item:first-child {
+      border-top: 1px solid var(--rule);
+    }
 
-    @media (max-width: 800px) {
-      .menu {
-        padding: 22px 20px;
-        overflow-x: auto;
+    .alternative .menu-item:last-child { border-bottom: 0; }
+
+    .help {
+      border-top: 1px solid var(--rule);
+      background: var(--ivory);
+      text-align: center;
+    }
+
+    .help p { margin-top: .8rem; }
+    .help .button { margin-top: 1.15rem; }
+
+    /* Footer standard */
+    .footer {
+      border-top: 1px solid var(--rule);
+      background: var(--ivory);
+      padding-block: 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .footer-grid > * { min-width: 0; }
+
+    .footer-name {
+      display: inline-block;
+      font: 700 1.3rem/1 var(--display);
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    .footer-email {
+      display: block;
+      margin-top: .3rem;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-links,
+    .social-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .footer-links { display: grid; gap: .35rem; }
+    .footer a[href]:hover { color: var(--red); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: .25rem;
+    }
+
+    .social-link {
+      display: grid;
+      width: 2.75rem;
+      height: 2.75rem;
+      place-items: center;
+    }
+
+    .social-link svg { width: 1.5rem; height: 1.5rem; }
+
+    .footer-partner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: .25rem .5rem;
+    }
+
+    .footer-partner img {
+      flex: 0 0 auto;
+      width: 6rem;
+      height: 2.75rem;
+      object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        display: grid;
+        justify-items: end;
+        gap: .5rem;
+        padding-block: 1rem .5rem;
       }
 
-      .menu ul {
-        width: max-content;
-        justify-content: flex-start;
-        gap: 25px;
-      }
+      .header-inner nav { grid-row: 2; width: 100%; }
+      .nav { justify-content: center; }
+      .event-card { grid-template-columns: minmax(0, 1fr); }
+      .poster { justify-content: center; }
+      .poster img { width: min(100%, 26rem); }
+      .event-info { text-align: center; }
+    }
 
-      .menu a {
-        font-size: 12px;
-        white-space: nowrap;
-      }
+    @media (max-width: 460px) {
+      .wrap { width: calc(100% - 2rem); }
+      .nav a { font-size: .85rem; }
 
-      .sezione {
-        padding: 75px 0;
-      }
-
-      .evento-intro {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        margin-top: 35px;
-      }
-
-      .evento-locandina {
-        min-height: auto;
-        aspect-ratio: 3 / 4;
-      }
-
-      .evento-dettagli {
-        padding: 45px 28px;
-      }
-
-      .evento-dettagli h1 {
-        margin-bottom: 45px;
-        letter-spacing: -4px;
-      }
-
-      .portata {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .legenda {
-        padding: 25px;
-      }
-
-      .legenda-grid {
-        grid-template-columns: 1fr;
-      }
+      .menu-item,
+      .allergen-legend ol,
+      .footer-grid { grid-template-columns: minmax(0, 1fr); }
     }
   </style>
 </head>
 
 <body>
+  <a class="skip" href="#contenuto">Vai al contenuto</a>
 
-  <nav class="menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="progetto.html">Il progetto</a></li>
-      <li><a href="collabora.html">Collabora con noi</a></li>
-      <li><a href="eventi.html">Eventi</a></li>
-      <li><a href="contatti.html">Contatti</a></li>
-    </ul>
-  </nav>
+  <header class="header">
+    <div class="wrap header-inner">
+      <nav aria-label="Menu principale">
+        <ul class="nav">
+          <li><a href="./progetto.html">Il progetto</a></li>
+          <li><a href="./collabora.html">Collabora con noi</a></li>
+          <li><a href="./eventi.html" aria-current="location">Eventi</a></li>
+          <li><a href="./contatti.html">Contatti</a></li>
+        </ul>
+      </nav>
 
-  <main>
+      <a class="brand" href="./index.html" aria-label="Quarta Parete, home">
+        QUARTAPARETE
+      </a>
+    </div>
+  </header>
 
-    <!-- LOCANDINA E INFORMAZIONI -->
-
-    <section class="contenitore">
-      <div class="evento-intro">
-
-        <img
-          class="evento-locandina"
-          src="images/barbie.jpeg"
-          alt="Locandina dell’evento Barbie"
-        >
-
-        <div class="evento-dettagli">
-          <h1>Barbie</h1>
-
-          <div class="informazione">
-            <h2>Dove</h2>
-            <p>Ristorante Blabla<br>Soncino</p>
-          </div>
-
-          <div class="informazione">
-            <h2>Quando</h2>
-            <p>14 settembre 2026</p>
-          </div>
-          
-          <div class="informazione">
-            <h2>Costo serata</h2>
-            <p>85,00 €</p>
-          </div>
-
-          <a class="prenota" href="prenotazione-barbie.html">
-            Prenota ora
-          </a>
-          
+  <main id="contenuto">
+    <section class="wrap hero" aria-labelledby="titolo-evento">
+      <div class="event-card">
+        <div class="poster">
+          <img src="./images/barbie.jpeg" alt="Locandina del film Barbie" fetchpriority="high">
         </div>
-      </div>
-    </section>
 
-    <!-- ESPERIENZA -->
+        <div class="event-info">
+          <p class="event-status">Evento dimostrativo</p>
+          <h1 id="titolo-evento">BARBIE</h1>
 
-    <section class="sezione">
-      <div class="contenitore esperienza">
-
-        <h2 class="titolo-sezione">L’esperienza</h2>
-
-        <p>
-          Per una sera il mondo reale si tingerà di rosa e il cinema
-          uscirà dallo schermo per arrivare direttamente a tavola.
-        </p>
-
-        <p>
-          Rivivremo insieme l’ironia, la nostalgia e l’energia di
-          <strong>Barbie</strong> attraverso una proiezione speciale e
-          un menu di quattro portate ispirato ai suoi momenti più iconici.
-        </p>
-
-        <p>
-          Ogni piatto accompagnerà una tappa diversa del viaggio:
-          dall’entusiasmo scintillante di una giornata perfetta fino alle
-          domande meno perfette — e decisamente più umane — nascoste dietro
-          tutto quel rosa. Non ti sveliamo cosa arriverà nel piatto:
-          possiamo solo dirti che, per qualche ora, non sarai più
-          semplicemente davanti al film. Sarai dentro il suo mondo.
-        </p>
-
-      </div>
-    </section>
-
-    <!-- MENU DELLA SERATA -->
-
-    <section class="sezione">
-      <div class="contenitore">
-
-        <h2 class="titolo-sezione">Menu della serata</h2>
-
-        <div class="menu-serata">
-
-          <div class="portata">
-            <p class="tipo-portata">Aperitivo</p>
-            <p class="nome-portata">
-              Hi Barbie!
-              <span class="allergeni-numeri">1 · 7 · 12</span>
-            </p>
-          </div>
-
-          <div class="portata">
-            <p class="tipo-portata">Primo</p>
-            <p class="nome-portata">
-              Best Day Ever
-              <span class="allergeni-numeri">1 · 3 · 7</span>
-            </p>
-          </div>
-
-          <div class="portata">
-            <p class="tipo-portata">Secondo</p>
-            <p class="nome-portata">
-              Do You Guys Ever Think About Dying?
-              <span class="allergeni-numeri">4 · 7 · 12</span>
-            </p>
-          </div>
-
-          <div class="portata">
-            <p class="tipo-portata">Dolce</p>
-            <p class="nome-portata">
-              I’m Enough
-              <span class="allergeni-numeri">6 · 7 · 8</span>
-            </p>
-          </div>
-
-          <div class="legenda">
-            <h3>Legenda allergeni</h3>
-
-            <div class="legenda-grid">
-              <p><strong>1</strong> — Glutine</p>
-              <p><strong>2</strong> — Crostacei</p>
-              <p><strong>3</strong> — Uova</p>
-              <p><strong>4</strong> — Pesce</p>
-              <p><strong>5</strong> — Arachidi</p>
-              <p><strong>6</strong> — Soia</p>
-              <p><strong>7</strong> — Latte</p>
-              <p><strong>8</strong> — Frutta a guscio</p>
-              <p><strong>9</strong> — Sedano</p>
-              <p><strong>10</strong> — Senape</p>
-              <p><strong>11</strong> — Sesamo</p>
-              <p><strong>12</strong> — Solfiti</p>
-              <p><strong>13</strong> — Lupini</p>
-              <p><strong>14</strong> — Molluschi</p>
+          <dl class="event-details">
+            <div>
+              <dt>Dove</dt>
+              <dd>Ristorante Blabla<br>Soncino</dd>
             </div>
-          </div>
+            <div>
+              <dt>Quando</dt>
+              <dd><time datetime="2026-09-14">14 settembre 2026</time></dd>
+            </div>
+            <div>
+              <dt>Costo serata</dt>
+              <dd>85,00 €</dd>
+            </div>
+          </dl>
 
+          <a class="button" href="./prenotazione-barbie.html">Prenota ora</a>
         </div>
       </div>
     </section>
 
-    <!-- ESIGENZE ALIMENTARI -->
-
-    <section class="sezione">
-      <div class="contenitore">
-
-        <h2 class="titolo-sezione">Esigenze alimentari</h2>
-
-        <p class="esigenze-intro">
-          Per questa serata sono previsti:
-          <strong>Menu vegetariano</strong> e <strong>Menu celiaco</strong>.
+    <section class="section experience" aria-labelledby="titolo-esperienza">
+      <div class="wrap">
+        <h2 id="titolo-esperienza">L’esperienza</h2>
+        <p>Per una sera il mondo reale si tinge di rosa e il cinema esce dallo schermo per arrivare a tavola.</p>
+        <p>
+          Rivivremo insieme l’ironia, la nostalgia e l’energia di <em>Barbie</em>
+          con una proiezione speciale e un <strong>menù di quattro portate</strong>
+          ispirato ai momenti più iconici del film. Ogni piatto accompagna una tappa
+          del viaggio, dall’entusiasmo di una giornata perfetta alle domande
+          decisamente più umane che si nascondono dietro tutto quel rosa.
         </p>
-
-        <div class="menu-speciali">
-
-          <details class="menu-speciale">
-            <summary>Menu vegetariano</summary>
-            <p>
-              Il menu vegetariano proposto sarà anch’esso ispirato al film
-              e contiene i seguenti allergeni:
-              <strong>1 · 5 · 10</strong>.
-            </p>
-          </details>
-
-          <details class="menu-speciale">
-            <summary>Menu celiaco</summary>
-            <p>
-              Il menu celiaco proposto sarà anch’esso ispirato al film
-              e contiene i seguenti allergeni:
-              <strong>2 · 13</strong>.
-            </p>
-          </details>
-
-        </div>
       </div>
     </section>
 
-    <!-- FORM DI CONTATTO -->
+    <section class="wrap section menu-section" aria-labelledby="titolo-menu">
+      <h2 id="titolo-menu">Menù della serata</h2>
 
-    <section class="sezione">
-      <div class="contenitore contatti-evento">
-
-        <h2 class="titolo-sezione">Hai qualche dubbio?</h2>
-
-        <p class="contatti-testo">
-          Non esitare a contattarci: ti risponderemo il prima possibile.
-        </p>
-
-        <form
-          class="contatti-form"
-          action="https://formsubmit.co/ilaria.bergo.bergonzi@gmail.com"
-          method="POST"
-        >
-
-          <input
-            type="hidden"
-            name="_subject"
-            value="Richiesta informazioni — Evento Barbie"
-          >
-
-          <input
-            type="hidden"
-            name="_template"
-            value="table"
-          >
-
-          <input
-            type="hidden"
-            name="Evento"
-            value="Barbie — 14 settembre 2026"
-          >
-
-          <input
-            class="campo-esca"
-            type="text"
-            name="_honey"
-            tabindex="-1"
-            autocomplete="off"
-          >
-
-          <div class="campo">
-            <label for="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="Nome"
-              autocomplete="given-name"
-              required
-            >
+      <ul class="menu-list" role="list">
+        <li class="menu-item">
+          <p class="course">Aperitivo</p>
+          <div>
+            <h3 class="dish-name">Hi Barbie! <span class="allergens" aria-label="Allergeni 1, 7 e 12">1 · 7 · 12</span></h3>
+            <p class="dish-description">Focaccina alla barbabietola con ricotta montata al limone, accompagnata da uno spritz al pompelmo rosa.</p>
           </div>
+        </li>
 
-          <div class="campo">
-            <label for="cognome">Cognome</label>
-            <input
-              type="text"
-              id="cognome"
-              name="Cognome"
-              autocomplete="family-name"
-              required
-            >
+        <li class="menu-item">
+          <p class="course">Primo</p>
+          <div>
+            <h3 class="dish-name">Best Day Ever <span class="allergens" aria-label="Allergeni 1, 3 e 7">1 · 3 · 7</span></h3>
+            <p class="dish-description">Ravioli rosa di pasta fresca ripieni di ricotta e limone, con burro alla salvia e Parmigiano.</p>
           </div>
+        </li>
 
-          <div class="campo">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              autocomplete="email"
-              required
-            >
+        <li class="menu-item">
+          <p class="course">Secondo</p>
+          <div>
+            <h3 class="dish-name">Do You Guys Ever Think About Dying? <span class="allergens" aria-label="Allergeni 4, 7 e 12">4 · 7 · 12</span></h3>
+            <p class="dish-description">Filetto di branzino su crema di patate viola al burro, con una riduzione di vino rosso.</p>
           </div>
+        </li>
 
-          <div class="campo">
-            <label for="messaggio">Messaggio</label>
-            <textarea
-              id="messaggio"
-              name="Messaggio"
-              required
-            ></textarea>
+        <li class="menu-item">
+          <p class="course">Dolce</p>
+          <div>
+            <h3 class="dish-name">I’m Enough <span class="allergens" aria-label="Allergeni 6, 7 e 8">6 · 7 · 8</span></h3>
+            <p class="dish-description">Mousse al cioccolato bianco e vaniglia, con cuore di lampone e granella di pistacchio.</p>
           </div>
+        </li>
+      </ul>
 
-          <button class="invia" type="submit">
-            Invia messaggio
-          </button>
+      <aside class="allergen-legend" aria-labelledby="titolo-allergeni">
+        <h3 id="titolo-allergeni">Legenda allergeni</h3>
+        <p>I numeri accanto ai piatti sono indicativi per questo menù dimostrativo.</p>
+        <ol>
+          <li>Cereali contenenti glutine</li>
+          <li>Crostacei</li>
+          <li>Uova</li>
+          <li>Pesce</li>
+          <li>Arachidi</li>
+          <li>Soia</li>
+          <li>Latte</li>
+          <li>Frutta a guscio</li>
+          <li>Sedano</li>
+          <li>Senape</li>
+          <li>Sesamo</li>
+          <li>Anidride solforosa e solfiti</li>
+          <li>Lupini</li>
+          <li>Molluschi</li>
+        </ol>
+      </aside>
+    </section>
 
-        </form>
+    <section class="section alternatives" aria-labelledby="titolo-alternative">
+      <div class="wrap">
+        <h2 id="titolo-alternative">Esigenze alimentari</h2>
+        <p class="alternatives-intro">Scopri le quattro portate del menù vegetariano e del menù senza glutine.</p>
 
+        <details class="alternative">
+          <summary>
+            Menù vegetariano
+            <span class="toggle-symbol" aria-hidden="true">
+              <span class="toggle-open">+</span><span class="toggle-close">−</span>
+            </span>
+          </summary>
+
+          <ul class="menu-list" role="list">
+            <li class="menu-item">
+              <p class="course">Aperitivo</p>
+              <div>
+                <h3 class="dish-name">Hi Barbie! <span class="allergens" aria-label="Allergeni 1 e 7">1 · 7</span></h3>
+                <p class="dish-description">Crostino di pane di grano con crema di barbabietola, ricotta al limone e timo.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Primo</p>
+              <div>
+                <h3 class="dish-name">Best Day Ever <span class="allergens" aria-label="Allergeni 1, 3, 7 e 8">1 · 3 · 7 · 8</span></h3>
+                <p class="dish-description">Ravioli rosa di pasta fresca all’uovo, ripieni di ricotta e limone, con burro alla salvia e mandorle tostate.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Secondo</p>
+              <div>
+                <h3 class="dish-name">Do You Guys Ever Think About Dying? <span class="allergens" aria-label="Allergeni 7 e 8">7 · 8</span></h3>
+                <p class="dish-description">Bistecca di cavolfiore arrosto su crema di patate viola al burro, con nocciole croccanti.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Dolce</p>
+              <div>
+                <h3 class="dish-name">I’m Enough <span class="allergens" aria-label="Allergeni 7 e 8">7 · 8</span></h3>
+                <p class="dish-description">Panna cotta alla vaniglia addensata con agar agar, con coulis di lamponi e granella di pistacchio.</p>
+              </div>
+            </li>
+          </ul>
+        </details>
+
+        <details class="alternative">
+          <summary>
+            Menù senza glutine
+            <span class="toggle-symbol" aria-hidden="true">
+              <span class="toggle-open">+</span><span class="toggle-close">−</span>
+            </span>
+          </summary>
+
+          <ul class="menu-list" role="list">
+            <li class="menu-item">
+              <p class="course">Aperitivo</p>
+              <div>
+                <h3 class="dish-name">Hi Barbie! <span class="allergens" aria-label="Allergene 7">7</span></h3>
+                <p class="dish-description">Polenta croccante di mais con crema di barbabietola, caprino e scorza di limone.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Primo</p>
+              <div>
+                <h3 class="dish-name">Best Day Ever <span class="allergens" aria-label="Allergene 7">7</span></h3>
+                <p class="dish-description">Risotto rosa alla barbabietola, mantecato al burro, con fiocchi di ricotta e timo.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Secondo</p>
+              <div>
+                <h3 class="dish-name">Do You Guys Ever Think About Dying? <span class="allergens" aria-label="Allergeni 4 e 7">4 · 7</span></h3>
+                <p class="dish-description">Filetto di branzino al forno su crema di patate viola al burro, con olio al limone.</p>
+              </div>
+            </li>
+
+            <li class="menu-item">
+              <p class="course">Dolce</p>
+              <div>
+                <h3 class="dish-name">I’m Enough <span class="allergens" aria-label="Allergeni 7 e 8">7 · 8</span></h3>
+                <p class="dish-description">Budino al cacao e latte, addensato con amido di mais, con lamponi freschi e pistacchi tostati.</p>
+              </div>
+            </li>
+          </ul>
+        </details>
       </div>
     </section>
 
+    <section class="section help" aria-labelledby="titolo-dubbi">
+      <div class="wrap">
+        <h2 id="titolo-dubbi">Hai qualche dubbio?</h2>
+        <p>Non esitare a contattarci.</p>
+        <a class="button" href="./contatti.html#modulo-contatto">Contattaci</a>
+      </div>
+    </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="footer-name" href="./index.html">QUARTAPARETE</a>
+        <a class="footer-email" href="mailto:info@quartaparete.events">
+          info@quartaparete.events
+        </a>
+      </div>
+
+      <nav aria-label="Informazioni sul sito">
+        <ul class="footer-links">
+          <li><a href="./privacy.html">Privacy Policy</a></li>
+          <li><a href="./termini.html">Terms of Service</a></li>
+          <li><a href="./faq.html">FAQs</a></li>
+        </ul>
+      </nav>
+
+      <div role="group" aria-label="Social">
+        <!-- Aggiungi href="URL_DEL_PROFILO" ai tag <a> quando hai i link ufficiali. -->
+        <ul class="social-links">
+          <li>
+            <a class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <circle cx="12" cy="12" r="4"></circle>
+                <circle cx="17.4" cy="6.7" r="1" fill="currentColor" stroke="none"></circle>
+              </svg>
+            </a>
+          </li>
+
+          <li>
+            <a class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2V8.6h-1.26c-1.24 0-1.62.77-1.62 1.57v1.89h2.77l-.44 2.91h-2.33V22C18.34 21.24 22 17.08 22 12.06Z"></path>
+              </svg>
+            </a>
+          </li>
+
+          <li>
+            <a class="social-link" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M16 2h-3.2v13.7a2.8 2.8 0 1 1-2.1-2.7V9.7a6 6 0 1 0 5.3 6V8.8a8 8 0 0 0 4.7 1.5V7.1A4.7 4.7 0 0 1 16 2Z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer-partner">
+        <span>In collaborazione con</span>
+        <img src="./images/logo-ubifilm-ok.png" alt="Ubifilm" loading="lazy">
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
